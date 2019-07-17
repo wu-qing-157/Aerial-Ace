@@ -1,7 +1,9 @@
 /Training/*/*
 !/Training/*/*.*
 !/Training/*/in
+/Training/*/a.out
 !/Training/*/*/
 /Training/*/*/*
 !/Training/*/*/*.*
 !/Training/*/*/in
+/Training/*/*/a.out
