@@ -49,7 +49,7 @@ template<typename T>
 struct line {
     point<T> a, b;
     line() {}
-    line(point<T> a, point<T> b) : a(a), b(b) {}
+    line(const point<T> &a, const point<T> &b) : a(a), b(b) {}
     point<T> v() const {
         return b - a;
     }
@@ -119,11 +119,11 @@ void process(std::vector<line<int64_t>> &ret) {
         }
         cur = cur + point<int64_t>(dx, dy);
     }
-    puts("READ");
-    for (auto i : sa) printf("(%ld, %ld) -> (%ld, %ld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
+    //puts("READ");
+    //for (auto i : sa) printf("(%ld, %ld) -> (%ld, %ld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
     std::sort(sa.begin(), sa.end(), cmp);
-    puts("SORTED");
-    for (auto i : sa) printf("(%ld, %ld) -> (%ld, %ld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
+    //puts("SORTED");
+    //for (auto i : sa) printf("(%ld, %ld) -> (%ld, %ld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
     for (int i = 0; i < (int) sa.size(); i++) {
         line<int64_t> cur = sa[i];
         while (i + 1 < (int) sa.size() && merge(cur, sa[i + 1])) i++;
@@ -138,12 +138,12 @@ bool trans(const point<int64_t> a, double rotate, double scale2, point<int64_t> 
     double y = std::sqrt(len2) * std::sin(angle);
     ret.x = std::llround(x);
     ret.y = std::llround(y);
-    // printf("%f %f (%ld, %ld) --> (%f, %f)(%ld, %ld)\n", rotate, scale, a.x, a.y, x, y, ret.x, ret.y);
+    //printf("%f %f (%ld, %ld) --> (%f, %f)(%ld, %ld)\n", rotate, scale, a.x, a.y, x, y, ret.x, ret.y);
     return sgn(ret.x - x) == 0 && sgn(ret.y - y) == 0;
 }
 
 bool judge(const point<int64_t> &delta1, const point<int64_t> &delta2, double rotate, double scale2) {
-    // printf("case (%ld, %ld) %ld %ld\n", delta.x, delta.y, rotate, scale);
+    //printf("case (%ld, %ld) %ld %ld\n", delta.x, delta.y, rotate, scale);
     set.clear();
     for (auto i : b) set.insert(i);
     for (auto i : a) {
@@ -154,7 +154,7 @@ bool judge(const point<int64_t> &delta1, const point<int64_t> &delta2, double ro
         l.a = l.a + delta2;
         l.b = l.b + delta2;
         pure_line(l);
-        printf("(%ld, %ld) -> (%ld %ld)\n", l.a.x, l.a.y, l.b.x, l.b.y);
+        //printf("(%ld, %ld) -> (%ld %ld)\n", l.a.x, l.a.y, l.b.x, l.b.y);
         if (!set.count(l))
             return false;
     }
@@ -165,10 +165,10 @@ int main() {
     while (true) {
         process(a);
         process(b);
-        puts("A");
-        for (auto i : a) printf("(%lld, %lld) -> (%lld, %lld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
-        puts("B");
-        for (auto i : b) printf("(%lld, %lld) -> (%lld, %lld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
+        //puts("A");
+        //for (auto i : a) printf("(%lld, %lld) -> (%lld, %lld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
+        //puts("B");
+        //for (auto i : b) printf("(%lld, %lld) -> (%lld, %lld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
         if (a.size() != b.size()) {
             puts("NO");
             continue;
@@ -179,7 +179,7 @@ int main() {
         }
         bool flag = true;
         for (auto i : b) {
-            printf("try (%lld, %lld) -> (%lld, %lld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
+            //printf("try (%lld, %lld) -> (%lld, %lld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
             if (judge(-a[0].a, i.a, i.v().angle() - a[0].v().angle(),
                         ((double) i.v().len2()) / a[0].v().len2()) ||
                     judge(-a[0].a, i.b, i.v().angle() - a[0].v().angle() + pi,

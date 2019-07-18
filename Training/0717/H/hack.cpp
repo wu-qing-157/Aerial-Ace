@@ -5,7 +5,7 @@
 #include <unordered_set>
 #include <vector>
 
-const double eps = 1e-9, pi = std::acos(-1);
+const double eps = 1e-7, pi = std::acos(-1);
 
 int sgn(double x) {
     return (x > eps) - (x < -eps);
@@ -21,9 +21,6 @@ struct point {
     }
     friend point operator-(const point &a, const point &b) {
         return point(a.x - b.x, a.y - b.y);
-    }
-    point operator-() const {
-        return point(-x, -y);
     }
     friend point operator*(const point &a, T &b) {
         return point(a.x * b, a.y * b);
@@ -94,7 +91,7 @@ bool cmp2(const point<int64_t> &a, const point<int64_t> &b) {
 
 bool merge(line<int64_t> &a, const line<int64_t> &b) {
     if (det(a.v(), b.v()) != 0) return false;
-    if (det(a.v(), b.b - a.a) != 0) return false;
+    if (det(a.v(), b.b - a.a)) return false;
     if ((a.a.y == a.b.y && a.b.x >= b.a.x) || a.b.y >= b.a.y) {
         a = line<int64_t>(std::min(a.a, b.a, cmp2), std::max(a.b, b.b, cmp2));
         return true;
@@ -119,11 +116,11 @@ void process(std::vector<line<int64_t>> &ret) {
         }
         cur = cur + point<int64_t>(dx, dy);
     }
-    puts("READ");
-    for (auto i : sa) printf("(%ld, %ld) -> (%ld, %ld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
+    //puts("READ");
+    //for (auto i : sa) printf("(%ld, %ld) -> (%ld, %ld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
     std::sort(sa.begin(), sa.end(), cmp);
-    puts("SORTED");
-    for (auto i : sa) printf("(%ld, %ld) -> (%ld, %ld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
+    //puts("SORTED");
+    //for (auto i : sa) printf("(%ld, %ld) -> (%ld, %ld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
     for (int i = 0; i < (int) sa.size(); i++) {
         line<int64_t> cur = sa[i];
         while (i + 1 < (int) sa.size() && merge(cur, sa[i + 1])) i++;
@@ -138,23 +135,23 @@ bool trans(const point<int64_t> a, double rotate, double scale2, point<int64_t> 
     double y = std::sqrt(len2) * std::sin(angle);
     ret.x = std::llround(x);
     ret.y = std::llround(y);
-    // printf("%f %f (%ld, %ld) --> (%f, %f)(%ld, %ld)\n", rotate, scale, a.x, a.y, x, y, ret.x, ret.y);
+    //printf("%f %f (%ld, %ld) --> (%f, %f)(%ld, %ld)\n", rotate, scale, a.x, a.y, x, y, ret.x, ret.y);
     return sgn(ret.x - x) == 0 && sgn(ret.y - y) == 0;
 }
 
-bool judge(const point<int64_t> &delta1, const point<int64_t> &delta2, double rotate, double scale2) {
-    // printf("case (%ld, %ld) %ld %ld\n", delta.x, delta.y, rotate, scale);
+bool judge(const point<int64_t> delta, double rotate, double scale2) {
+    //printf("case (%ld, %ld) %ld %ld\n", delta.x, delta.y, rotate, scale);
     set.clear();
     for (auto i : b) set.insert(i);
     for (auto i : a) {
         line<int64_t> l;
-        if (!trans(i.a + delta1, rotate, scale2, l.a) ||
-                !trans(i.b + delta1, rotate, scale2, l.b))
+        if (!trans(i.a, rotate, scale2, l.a) ||
+                !trans(i.b, rotate, scale2, l.b))
             return false;
-        l.a = l.a + delta2;
-        l.b = l.b + delta2;
+        l.a = l.a + delta;
+        l.b = l.b + delta;
         pure_line(l);
-        printf("(%ld, %ld) -> (%ld %ld)\n", l.a.x, l.a.y, l.b.x, l.b.y);
+        //printf("(%ld, %ld) -> (%ld %ld)\n", l.a.x, l.a.y, l.b.x, l.b.y);
         if (!set.count(l))
             return false;
     }
@@ -162,33 +159,26 @@ bool judge(const point<int64_t> &delta1, const point<int64_t> &delta2, double ro
 }
 
 int main() {
-    while (true) {
+    for (int cas = 1; true; cas++) {
         process(a);
         process(b);
-        puts("A");
-        for (auto i : a) printf("(%lld, %lld) -> (%lld, %lld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
-        puts("B");
-        for (auto i : b) printf("(%lld, %lld) -> (%lld, %lld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
-        if (a.size() != b.size()) {
-            puts("NO");
-            continue;
+        if (cas == 187) {
+            printf("%lld %lld\n", (int64_t) a.size(), (int64_t) b.size());
         }
-        if (a.size() == 0u) {
-            puts("YES");
-            continue;
-        }
+        if (a.size() != b.size()) continue;
+        if (a.size() == 0) continue;
         bool flag = true;
         for (auto i : b) {
-            printf("try (%lld, %lld) -> (%lld, %lld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
-            if (judge(-a[0].a, i.a, i.v().angle() - a[0].v().angle(),
+            //printf("try (%lld, %lld) -> (%lld, %lld)\n", i.a.x, i.a.y, i.b.x, i.b.y);
+            if (judge(i.a - a[0].a, i.v().angle() - a[0].v().angle(),
                         ((double) i.v().len2()) / a[0].v().len2()) ||
-                    judge(-a[0].a, i.b, i.v().angle() - a[0].v().angle() + pi,
+                    judge(i.b - a[0].a, i.v().angle() - a[0].v().angle() + pi,
                         ((double) i.v().len2()) / a[0].v().len2())) {
-                puts("YES");
+                if (cas <= 3) puts("YES");
                 flag = false;
                 break;
             }
         }
-        if (flag) puts("NO");
+        if (cas <= 3 && flag) puts("NO");
     }
 }
