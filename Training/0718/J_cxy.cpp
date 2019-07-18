@@ -39,11 +39,12 @@ int main() {
 			c.push_back(make_pair(f.first, b[m - 1].second));
 		else {
 			for (int i = 1; i < b.size(); i++) 
-				if (f.second >= b[i - 1].first && f.second <= b[i].first) {
-				double k = (b[i].second - b[i - 1].second) / (b[i].first - b[i - 1].first);
-				c.push_back(make_pair(f.first, b[i - 1].second + (f.second - b[i - 1].first) * k));
-				break;
-			}
+				if (f.second <= b[i].first) {
+	//before :  if (f.second >= b[i - 1].first) {
+					double k = (b[i].second - b[i - 1].second) / (b[i].first - b[i - 1].first);
+					c.push_back(make_pair(f.first, b[i - 1].second + (f.second - b[i - 1].first) * k));
+					break;
+				}
 		}
 	}
 	for (auto g : b) {
