@@ -1,4 +1,0 @@
-4c4
-<     printf("%lld\n", 1ll);
----
->     printf("%lld\n", 1);
