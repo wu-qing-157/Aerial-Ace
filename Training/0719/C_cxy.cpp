@@ -33,7 +33,7 @@ void cross(int f, int g) {
 			number x = -1.0 * (fun[f].c - fun[g].c) / (fun[f].b - fun[g].b);
 			if (x <= -1e5 + eps || x >= 1e5 - eps) {
 			
-			} else point.push_back(make_pair(x, make_pair(fun[f].id, fun[g].id)));
+			} else point.push_back(make_pair(x, make_pair(f, g)));
 		}
 	} else {
 		ll a = fun[f].a - fun[g].a;
@@ -45,8 +45,8 @@ void cross(int f, int g) {
 		} else {
 			number x1 = (-b + sqrt(number(delta))) / a / 2;
 			number x2 = (-b - sqrt(number(delta))) / a / 2;
-			point.push_back(make_pair(x1, make_pair(fun[f].id, fun[g].id)));
-			point.push_back(make_pair(x2, make_pair(fun[f].id, fun[g].id)));
+			point.push_back(make_pair(x1, make_pair(f, g)));
+			point.push_back(make_pair(x2, make_pair(f, g)));
 		}
 	}
 }
@@ -60,8 +60,8 @@ void work() {
 	for (int i = 1; i <= n; i++) 
 		scanf("%d%d%d", &fun[i].a, &fun[i].b, &fun[i].c), fun[i].id = i;
 		
-	std::sort(fun + 1, fun + n + 1, [](auto a, auto b) { return a.a == b.a ? (a.b == b.b ? a.c < b.c : a.b < b.b) : a.a < b.a; });
-	n = std::unique(fun + 1, fun + n + 1, [](auto a, auto b) { return a.a == b.a && a.b == b.b && a.c == b.c; }) - fun - 1;
+	//std::sort(fun + 1, fun + n + 1, [](auto a, auto b) { return a.a == b.a ? (a.b == b.b ? a.c < b.c : a.b < b.b) : a.a < b.a; });
+	//n = std::unique(fun + 1, fun + n + 1, [](auto a, auto b) { return a.a == b.a && a.b == b.b && a.c == b.c; }) - fun - 1;
 	
 	for (int i = 1; i <= n; i++) 
 		for (int j = i + 1; j <= n; j++) 	
