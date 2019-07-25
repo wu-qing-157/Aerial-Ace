@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int maxn = 1e5 + 10;
+const int maxn = 4e5 + 10;
 const int inf = 1e9;
 
 vector<int>T1[maxn], T2[maxn];
@@ -66,7 +66,7 @@ int ask(int p, int l, int r, int _L, int _R) {
 
 
 void dfs(int u, int w) {
-	cout << u << ' ' << w << endl;
+	//cout << u << ' ' << w << endl;
 	dfn[++dfc] = u; 
 	L[u] = dfc;
 	add(1, 1, n, L[u], L[u], w);
@@ -99,11 +99,11 @@ void work() {
 	memset(L, 0, sizeof(L[0]) * (n + 1));
 	memset(M, 0, sizeof(M[0]) * (n + 1));
 	memset(R, 0, sizeof(R[0]) * (n + 1));
+	memset(fa1, 0, sizeof(fa1[0]) * (n + 1));
+	memset(root, 0, sizeof(root[0]) * (n + 1));
 	
 	
 	for (int i = 1; i <= n; i++) scanf("%d", &Ra[i]), Ra[i] = log_2(Ra[i]);
-	
-
 	
 	for (int i = 1; i <= m; i++) {
 		int a, x, y;
@@ -113,7 +113,7 @@ void work() {
 		else 
 			T2[x].push_back(y), T2[y].push_back(x);
 	}
-	for (int i = 1; i <= 1; i++) 
+	for (int i = 1; i <= n; i++) 
 		if (!L[i]) 
 			root[i] = i, dfs(i, 0);
 			
@@ -122,38 +122,38 @@ void work() {
 		scanf("%d%d%d", &a, &x, &y);
 		if (a == 1) {
 			int _R = log_2(y);
-			cout << "GG" << endl;
+			//cout << "GG" << endl;
 			if (fa1[x]) {
 				add(1, 1, n, L[x], R[x], Ra[x] - _R);
 				if (L[x] < M[x])
 					add(1, 1, n, L[x] + 1, M[x], _R - Ra[x]);
 			}
 			else {
-				cout << "gg2" << endl;
+				//cout << "gg2" << endl;
 				if (L[x] < M[x]) {
-					cout << " ##" << L[x] + 1 << ' ' << R[x] << _R - Ra[x] << endl;
+				//	cout << " ##" << L[x] + 1 << ' ' << R[x] << _R - Ra[x] << endl;
 					add(1, 1, n, L[x] + 1, M[x], _R - Ra[x]);
 				}
 			}	
 			Ra[x] = _R;
 		}
 		else {
-			int w1 = ask(1, 1, n, x, x);
+			int w1 = ask(1, 1, n, L[x], L[x]);
 			int w2 = ask(1, 1, n, L[root[x]], R[root[x]]);
-			cout << root[x] << ' ' << L[root[x]] << ' ' << R[root[x]] << endl;
-			cout << w1 << ' ' << w2 << endl;
-			printf("%.4f\n", log(y) + (w2 - w1) * log(2));
+		//	cout << root[x] << ' ' << L[root[x]] << ' ' << R[root[x]] << endl;
+		//	cout << w1 << ' ' << w2 << endl;
+			printf("%.3f\n", log(y) + (w2 - w1) * log(2));
 		}
-		for (int i = 1; i <= n; i++)
-			printf("v%d = %d\n", i, ask(1, 1, n, L[i], L[i]));
-		cout << "=-----------" << endl;
+		//for (int i = 1; i <= n; i++)
+		//	printf("v%d = %d\n", i, ask(1, 1, n, L[i], L[i]));
+		//cout << "=-----------" << endl;
 	}
 }
 
 int main() {
 
 	while (scanf("%d%d%d", &n, &m, &q) != EOF) {
-		printf("Case #%d: ", ++t);
+		printf("Case #%d:\n", ++t);
 		work();
 	}
 	return 0;	
@@ -166,5 +166,5 @@ int main() {
 2 1 4
 1 1 16
 1 2 4
-
+2 4 4
 */
