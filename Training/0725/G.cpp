@@ -116,6 +116,8 @@ void work() {
 	for (int i = 1; i <= 1; i++) 
 		if (!L[i]) 
 			root[i] = i, dfs(i, 0);
+	
+	for (int i = 1; i <= n; i++) cout << fa1[i] << ' '; cout << endl;
 			
 	while (q--) {
 		int a, x, y;
