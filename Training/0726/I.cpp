@@ -64,7 +64,6 @@ struct segtree {
 	}
 } seg[110];
 
-int f[maxn][110];
 int D[maxn], C[maxn], R[maxn], P[maxn];
 vector<pair<int, int> >seg[maxn];
 
