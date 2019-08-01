@@ -1,3 +1,4 @@
+#include <cassert>
 #include <cstdio>
 #include <cstdint>
 #include <algorithm>
@@ -6,24 +7,39 @@ const int N = 4e5 + 10;
 const int64_t MOD1 = 998244353, MOD2 = 1045430273, MOD3 = 1051721729;
 int rev[N];
 
-__int128_t extend_gcd(__int128_t a, __int128_t b, __int128_t &x, __int128_t &y) {
+int64_t extend_gcd(int64_t a, int64_t b, int64_t &x, int64_t &y) {
     if (b == 0) {
         x = 1, y = 0;
         return a;
     }
-    __int128_t res = extend_gcd(b, a % b, x, y);
-    __int128_t t = y;
-    t = x - a / b * y;
+    int64_t res = extend_gcd(b, a % b, x, y);
+    int64_t t = y;
+    y = x - a / b * y;
     x = t;
     return res;
 }
 
-__int128_t crt(__int128_t r1, __int128_t m1, __int128_t r2, __int128_t m2) {
-    __int128_t x, y, g = extend_gcd(m1, m2, x, y);
+int64_t crt(int64_t r1, int64_t m1, int64_t r2, int64_t m2) {
+    int64_t x, y, g = extend_gcd(m1, m2, x, y);
     x = (r2 - r1) * x % m2;
     if (x < 0) x += m2;
     x /= g;
     return r1 + m1 * x;
+}
+
+int64_t mul(int64_t x, int64_t y, int64_t p) {
+    int64_t t = (x * y - (int64_t) ((long double) x / p * y + 1e-3) * p) % p;
+    return t < 0 ? t + p : t;
+}
+
+int64_t crt2(int64_t r1, int64_t m1, int64_t r2, int64_t m2, int64_t mod) {
+    int64_t x, y;
+    extend_gcd(m1, m2, x, y);
+    // x = (r2 - r1) * x % m2;
+    x = mul((r2 - r1 + m2 * mod) % (m2 * mod), x, m2 * mod);
+    x %= m2;
+    if (x < 0) x += m2;
+    return r1 + (x % mod) * (m1 % mod);
 }
 
 int64_t pow(int64_t a, int64_t exp, int64_t MOD) {
@@ -38,15 +54,19 @@ int64_t pow(int64_t a, int64_t exp, int64_t MOD) {
 
 namespace ntt {
 void solve(int64_t *p, int n, int idft, int64_t MOD, int64_t G) {
-    for (int i = 0; i < n; i++) if (i < rev[i]) std::swap(p[i], p[rev[i]]);
+    for (int i = 0; i < n; i++)
+        if (i < rev[i])
+            std::swap(p[i], p[rev[i]]);
     for (int j = 1; j < n; j <<= 1) {
         static int64_t wn1, w, t0, t1;
         wn1 = pow(G, (MOD - 1) / (j << 1), MOD);
-        if (idft == -1) wn1 = pow(wn1, MOD - 2, MOD);
+        if (idft == -1)
+            wn1 = pow(wn1, MOD - 2, MOD);
         for (int i = 0; i < n; i += j << 1) {
             w = 1;
             for (int k = 0; k < j; k++) {
-                t0 = p[i + k]; t1 = w * p[i + j + k] % MOD;
+                t0 = p[i + k];
+                t1 = w * p[i + j + k] % MOD;
                 p[i + k] = (t0 + t1) % MOD;
                 p[i + j + k] = (t0 - t1 + MOD) % MOD;
                 (w *= wn1) %= MOD;
@@ -55,7 +75,8 @@ void solve(int64_t *p, int n, int idft, int64_t MOD, int64_t G) {
     }
     if (idft == -1) {
         int64_t nInv = pow(n, MOD - 2, MOD);
-        for (int i = 0; i < n; i++) (p[i] *= nInv) %= MOD;
+        for (int i = 0; i < n; i++)
+            (p[i] *= nInv) %= MOD;
     }
 }
 }
@@ -78,7 +99,7 @@ int64_t a[N], b[N], ta[N], tb[N], r1[N], r2[N], r3[N];
 void solve(int n, int64_t *r, int64_t mod, int64_t prt) {
     static int nn, len;
     len = 0;
-    for (nn = 1; nn <= n + n; nn <<= 1) len++;
+    for (nn = 1; nn < n + n; nn <<= 1) len++;
     for (int i = 0; i < n; i++) ta[i] = a[i], tb[i] = b[i];
     for (int i = n; i < nn; i++) ta[i] = tb[i] = 0;
     rev[0] = 0;
@@ -87,7 +108,7 @@ void solve(int n, int64_t *r, int64_t mod, int64_t prt) {
     ntt::solve(tb, nn, 1, mod, prt);
     for (int i = 0; i <= nn; i++) (ta[i] *= tb[i]) %= mod;
     ntt::solve(ta, nn, -1, mod, prt);
-    for (int i = 0; i <= n; i++) r[i] = ta[i];
+    for (int i = 0; i < n; i++) r[i] = ta[i];
 }
 
 void process(int64_t *x, int n) {
@@ -99,9 +120,7 @@ void process(int64_t *x, int n) {
     solve(n + 1, r1, MOD1, 3);
     solve(n + 1, r2, MOD2, 3);
     solve(n + 1, r3, MOD3, 6);
-    // for (int i = 0; i <= n; i++) printf("%lld\n", r1[i]);
-    for (int i = 0; i <= n; i++) x[i] = crt(crt(r1[i], MOD1, r2[i], MOD2), MOD1 * MOD2, r3[i], MOD3) % MOD * fac[i] % MOD;
-    // for (int i = 0; i <= n; i++) printf("%lld\n", x[i]);
+    for (int i = 0; i <= n; i++) x[i] = crt2(crt(r1[i], MOD1, r2[i], MOD2), MOD1 * MOD2, r3[i], MOD3, MOD) % MOD * fac[i] % MOD;
 }
 
 int64_t ans;
