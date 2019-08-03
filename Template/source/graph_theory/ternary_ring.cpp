@@ -1,25 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n, m; // vertex & edge 
-vector<pair<int, int> >E[maxn]; // input
+const int maxn = 1e5 + 10;
 
-#define fi first
-#define se second
-#define pb push_back
-long long Three() {
+long long ternary_ring(int n, const vector<pair<int, int>>&E) {
     static vector<int>G[maxn];
     static int visby[maxn], deg[maxn];
     for (int i = 0; i <= n; i++) 
         visby[i] = deg[i] = 0,  G[i].clear();
-    for (auto e : E) deg[e.fi]++, deg[e.se]++;
-    for (auto e : E) deg[e.fi] > deg[e.se] ? 
-        G[e.fi].pb(e.se) : G[e.se].pb(fi);
+    for (auto e : E) deg[e.first]++, deg[e.second]++;
+    for (auto e : E) deg[e.first] > deg[e.second] ? 
+        G[e.first].push_back(e.second) : G[e.second].push_back(e.first);
     long long ans = 0;
     for (int u = 0; u <= n; u++) {
         for (auto v : G[u]) visby[v] = u;
         for (auto v : G[u]) for (auto w : G[v]) 
-            if (w[visby] == u) ans++;
+            if (w[visby] == u) ans++; // (u, v, w) unordered
     }
     return ans;
-}
+} // O(n + m \times \sqrt(m)) 
+
 int main() {}
