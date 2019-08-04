@@ -1,0 +1,5 @@
+name=`echo $GEDIT_CURRENT_DOCUMENT_NAME | cut -d. -f1`
+make $name 
+dir=$GEDIT_CURRENT_DOCUMENT_DIR
+gnome-terminal --hide-menubar --working-directory=$dir -x bash -c "time $dir/$name;echo;echo 'please enter to continue.';read;"
+# Ctrl + G
