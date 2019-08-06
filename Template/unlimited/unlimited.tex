@@ -1,4 +1,5 @@
 \documentclass[titlepage, openany]{book}
+%\documentclass[titlepage, openany, oneside]{book}
 \usepackage[cache=false]{minted}
 \usepackage{xeCJK}
 \usepackage{geometry}
@@ -19,13 +20,12 @@
 \usepackage{textcomp}
 \usepackage{enumitem}
 
-% Set scale=0.9 for limited version
-% Set scale=0.8 for unlimited version
 \geometry{a4paper, scale=0.8}
+%\geometry{a4paper, scale=0.9}
 \pagestyle{fancy}
 \fancypagestyle{plain}{}
 
-\titleformat{\chapter}{\huge\bfseries\centering}{}{1em}{}
+\titleformat{\chapter}{\huge\bfseries\centering}{}{0em}{}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
 \fancyhead[RO,LE]{\rightmark}
@@ -52,6 +52,7 @@
 \newcommand{\mychapter}[2]{
     \chapter{#1}
     \input{#2}
+    \cleardoublepage
 }
 
 \renewcommand{\theFancyVerbLine}{\sffamily\textcolor[rgb]{0.5, 0.5, 0.5}{\tiny\arabic{FancyVerbLine}}}
