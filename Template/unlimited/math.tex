@@ -16,6 +16,8 @@
 	\myminted{cpp}{math/square_remainder.cpp}
 \section{组合数\ \small(Nightfall)}
 	\myminted{cpp}{math/ex_lucas.cpp}
+\section{高斯消元\ \small(ct)}
+    \myminted{cpp}{math/gauss_elimination.cpp}
 \section{Miller\ Rabin\ \&\ Pollard\ Rho\ \small(gy)}
 	\begin{tabular}{l r}
 		\hline
@@ -29,7 +31,7 @@
 	\myminted{cpp}{math/linear_rec.cpp}
 \section{线性基\ \small(ct)}
 	\myminted{cpp}{math/linear_base.cpp}
-\section{FFT\ NTT\ FWT\ \small(lhy,ct,gy)}
+\section{多项式\ \small(lhy,ct,gy)}
     \subsection*{多项式操作\ \small(gy)}
         \begin{itemize}[wide=0pt]
             \item 求逆:
@@ -125,6 +127,8 @@
 		\\$ {0 \brack 0} = 1, {n \brack 0} = {0 \brack n} = 0, n > 0 $
 		\\$ {n \brack k} $为将$ n $个元素分成$ k $个环的方案数
 		\\$ {x \brack x - n} = \sum\limits_{k = 0}^{n} \Eularian{n}{k} \binom{x + k}{2 n} $
+        \\$ x^{\underline n} = \sum\limits_{k = 0}^{n} {n \brack k} (-1)^{n - k} x^k $
+        \\$ x^{\overline n} = \sum\limits_{k = 0}^{n} {n \brack k} x^k $
 	\subsection*{Stirling number (2nd kind)}
 		用$ {n \brace k} $表示Stirling number (2nd kind)，为将$ n $个元素划分成$ k $个非空集合的方案数
 		\\$ {n + 1 \brace k} = k {n \brace k} + {n \brace k - 1}, k > 0 $, $ {0 \brace 0} = 1, {n \brace 0} = {0 \brace n} = 0, n > 0 $
@@ -163,13 +167,11 @@
 		$ \Eularian{n}{k} $表示Stirling permutation中，恰有$ k $个数比前一个大的方案数
 		\\$ \Eularian{n}{m} = (2n - m - 1) \Eularian{n - 1}{m - 1} + (m + 1) \Eularian{n - 1}{m} $
 		\\$ \Eularian{n}{0} = 1 $, $ \Eularian{0}{m} = [m = 0] $
-	\subsection*{Burnside lemma}
-		Let $ G $ be a finite group that acts on a set $ X $. For each $ g $ in $ G $ let $ X^g $ denote the set of elements in $ X $ that are fixed by $ g $ (also said to be left invariant by $ g $), i.e. $ X^g = \lbrace x \in X \mid g.x = x \rbrace $. Burnside's lemma asserts the following formula for the number of orbits, denoted $ \left| X / G \right| $:
-		\\$ \left| X / G \right| = \frac{1}{\left| G \right|} \sum\limits_{g \in G}^{} \left| X^g \right| $
-    \subsection*{Pólya theorem}
-        设$ \overline{G} $是$ n $个对象的置换群，用$ m $种颜色对$ n $个对象染色，则不同染色方案为：
-        \\$ L = \frac{1}{\left| \overline{G} \right|} (m^{c(\overline{P_1})} + m^{c(\overline{P_2})} + \dots + m^{c(\overline{P_g})}) $
-        \\其中$ \overline{G} = \lbrace \overline{P_1}, \overline{P_2}, \dots, \overline{P_g} \rbrace $，$ c(\overline{P_k}) $为$ \overline{P_k} $的循环节数
+    \subsection*{二项式反演}
+        $ f(n) = \sum\limits_{i = 0}^{n} \binom{n}{i} g(i) \Leftrightarrow g(n) = \sum\limits_{i = 0}^{n} (-1)^{n - i} \binom{n}{i} f(i) $
+        \\$ f(n) = \sum\limits_{i = 0}^{n} (-1)^i \binom{n}{i} g(i) \Leftrightarrow g(n) = \sum\limits_{i = 0}^{n} (-1)^i \binom{n}{i} f(i) $
+    \subsection*{Stirling反演}
+        $ f(n) = \sum\limits_{i = 0}^{n} { n \brace i} g(i) \Leftrightarrow g(n) = \sum\limits_{i = 0}^{n} (-1)^{n - i} {n \brack i} f(i) $
 	\subsection*{Möbius function}
 		$ \mu(n) = \begin{cases}
 			1 & n \text{ square-free, even number of prime factors}\\
@@ -180,7 +182,15 @@
 			1 & n = 1\\
 			0 & n > 1
 		\end{cases} $
-		\\$ g(n) = \sum\limits_{d \mid n} f(d) \Leftrightarrow f(n) = \sum\limits_{d \mid n} \mu(d) g(\frac{n}{d}) $
+		\\$ f(n) = \sum\limits_{d \mid n} g(d) \Leftrightarrow g(n) = \sum\limits_{d \mid n} \mu(d) f(\frac{n}{d}) $
+        \\$ f(n) = \sum\limits_{n \mid d} g(d) \Leftrightarrow g(n) = \sum\limits_{n \mid d} \mu(\frac{d}{n}) f(d) $
 	\subsection*{Lagrange polynomial}
 		给定次数为$ n $的多项式函数$ L(x) $上的$ n + 1 $个点$ (x_0, y_0), (x_1, y_1), \dots, (x_n, y_n) $
 		\\则$ L(x) = \sum\limits_{j = 0}^{n} y_j \prod\limits_{0 \leq m \leq n, m \ne j} \frac{x - x_m}{x_j - x_m} $
+	\subsection*{Burnside lemma}
+		Let $ G $ be a finite group that acts on a set $ X $. For each $ g $ in $ G $ let $ X^g $ denote the set of elements in $ X $ that are fixed by $ g $ (also said to be left invariant by $ g $), i.e. $ X^g = \lbrace x \in X \mid g.x = x \rbrace $. Burnside's lemma asserts the following formula for the number of orbits, denoted $ \left| X / G \right| $:
+		\\$ \left| X / G \right| = \frac{1}{\left| G \right|} \sum\limits_{g \in G}^{} \left| X^g \right| $
+    \subsection*{Pólya theorem}
+        设$ \overline{G} $是$ n $个对象的置换群，用$ m $种颜色对$ n $个对象染色，则不同染色方案为：
+        \\$ L = \frac{1}{\left| \overline{G} \right|} (m^{c(\overline{P_1})} + m^{c(\overline{P_2})} + \dots + m^{c(\overline{P_g})}) $
+        \\其中$ \overline{G} = \lbrace \overline{P_1}, \overline{P_2}, \dots, \overline{P_g} \rbrace $，$ c(\overline{P_k}) $为$ \overline{P_k} $的循环节数

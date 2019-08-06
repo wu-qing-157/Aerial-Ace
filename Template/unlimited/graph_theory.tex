@@ -16,8 +16,6 @@
     $ 0 $-based, 需删除自环
     \\极大团计数, 最坏情况$ O(3^{n / 3}) $
     \myminted{cpp}{graph_theory/maximum_clique_count.cpp}
-\section{SAP\ \small(lhy)}
-    \myminted{cpp}{graph_theory/sap.cpp}
 \section{二分图最大匹配\ \small(lhy)}
     左侧$ n $个点，右侧$ m $个点，$ 1 $-based，初始化将$ matx $和$ maty $置为$ 0 $
     \myminted{cpp}{graph_theory/hopcroft_karp.cpp}
@@ -31,14 +29,16 @@
 \section{最小树形图\ \small(Nightfall)}
     \myminted{cpp}{graph_theory/zhu_liu.cpp}
 \section{支配树\ \small(Nightfall)}
-    %\subsection*{DAG\ \small(ct)}
-        %\myminted{cpp}{graph_theory/dominator_tree_dag.cpp}
-    %\subsection*{一般图\ \small(Nightfall)}
-    \myminted{cpp}{graph_theory/dominator_tree.cpp}
+    \subsection*{DAG\ \small(ct)}
+        \myminted{cpp}{graph_theory/dominator_tree_dag.cpp}
+    \subsection*{一般图\ \small(Nightfall)}
+        \myminted{cpp}{graph_theory/dominator_tree.cpp}
 \section{虚树\ \small(ct)}
     \myminted{cpp}{graph_theory/virtual_tree.cpp}
 \section{点分治\ \small(ct)}
     \myminted{cpp}{graph_theory/divide_conquer_on_tree.cpp}
+\section{树上倍增\ \small(ct)}
+    \myminted{cpp}{graph_theory/multiplier_on_tree.cpp}
 \section{Link-Cut\ Tree\ \small(ct)}
     LCT常见应用
     \begin{itemize}[nosep, wide=0pt]
@@ -75,8 +75,13 @@
     \myminted{cpp}{graph_theory/circle_square_tree.cpp}
 \section{无向图最小割\ \small(Nightfall)}
     \myminted{cpp}{graph_theory/stoer_wagner.cpp}
-\section{zkw费用流\ \small(lhy)}
-    \myminted{cpp}{graph_theory/zkw_min_cost_flow.cpp}
+\section{网络流\ \small(lhy,ct)}
+    \subsection*{Dinic\ \small(ct)}
+        \myminted{cpp}{graph_theory/dinic.cpp}
+    \subsection*{SAP\ \small(lhy)}
+        \myminted{cpp}{graph_theory/sap.cpp}
+    \subsection*{zkw费用流\ \small(lhy)}
+        \myminted{cpp}{graph_theory/zkw_min_cost_flow.cpp}
 \section{图论知识\ \small(gy,lhy)}
     \subsection*{Hall theorem}
         二分图$ G = (X, Y, E) $有完备匹配的充要条件是：对于$ X $的任意一个子集$ S $都满足$ \left| S \right| \leq \left| A(S) \right| $，$ A(S) $是$ Y $的子集，是$ S $的邻集（与$ S $有边的边集）。

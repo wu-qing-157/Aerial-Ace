@@ -1,15 +1,21 @@
-\section{exKMP\ \small(ct)}
-    $ extend_i $表示$ T $与$ S_{i,n} $的最长公共前缀
-    \myminted{cpp}{string/ex_kmp.cpp}
+\section{KMP\ \small(ct)}
+    \subsection*{KMP}
+        \myminted{cpp}{string/kmp.cpp}
+    \subsection*{exKMP}
+        $ extend_i $表示$ T $与$ S_{i,n} $的最长公共前缀
+        \myminted{cpp}{string/ex_kmp.cpp}
 \section{Lydon\ Word\ Decomposition\ \small(Nightfall)}
     满足$ s $的最小后缀等于$ s $本身的串称为Lyndon串.
     \\等价于: $ s $是它自己的所有循环移位中唯一最小的一个.
     \\任意字符串$ s $可以分解为$ s = \overline{s_1 s_2 \dots s_k} $，其中$ s_i $是Lyndon串，$ s_i \geq s_i + 1 $。且这种分解方法是唯一的。
     \myminted{cpp}{string/lydon.cpp}
-\section{后缀数组\ \small(ct)}
-    \myminted{cpp}{string/suffix_array.cpp}
-\section{后缀自动机\ \small(lhy)}
-    \myminted{cpp}{string/suffix_automaton_lhy.cpp}
+\section{后缀数组\ \small(ct,cxy)}
+    \subsection*{后缀数组\ \small(ct)}
+        \myminted{cpp}{string/suffix_array.cpp}
+    \subsection*{后缀数组\ \small(cxy)}
+        \myminted{cpp}{string/suffix_array_cxy.cpp}
+\section{后缀自动机\ \small(ct)}
+    \myminted{cpp}{string/suffix_automaton.cpp}
 \section{Manacher\ \small(ct)}
     \myminted{cpp}{string/manacher.cpp}
 \section{回文树\ \small(ct)}
