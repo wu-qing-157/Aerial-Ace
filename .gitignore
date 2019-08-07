@@ -10,3 +10,6 @@
 /Training/*/*.class
 !/Training/*/*/in
 /Training/*/*/a.out
+*.toc
+*.aux
+*.log
