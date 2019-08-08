@@ -1,5 +1,5 @@
 unlimited.pdf: */.* */* *.tex
-	xelatex -shell-escape -interaction=nonstopmode unlimited.tex >> xelatex.log && echo $i Done. || (echo Failed. && rm unlimited.pdf || print "")
+	xelatex -shell-escape unlimited.tex || (rm unlimited.pdf ; return 1)
 
 release.pdf: */.* */* *.tex
 	for i in $$(seq 1 5) ; do \
