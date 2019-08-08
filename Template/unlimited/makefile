@@ -1,4 +1,4 @@
-unlimited.pdf: */.* */* *.tex
+single: */.* */* *.tex
 	xelatex -shell-escape unlimited.tex || (rm unlimited.pdf ; return 1)
 
 release.pdf: */.* */* *.tex
