@@ -3,8 +3,15 @@
 \section{ex-Euclid\ \small(gy)}
     \myminted{cpp}{math/extend_gcd.cpp}
 \section{中国剩余定理\ \small(Durandal)}
-    返回是否可行，余数和模数结果为$ r_1 $, $ m_1 $
-    \myminted{cpp}{math/chinese_remainder_theorem.cpp}
+    \subsection*{中国剩余定理}
+        若$ m_1, m_2, \dots, m_n $两两互素，则方程组$ x \equiv a_i \pmod{m_i} $有解，且解可以由以下方法构造：
+        \\$ M = \prod\limits_{i = 1}^{n} m_i $
+        \\$ M_i = \frac{M}{m_i} $
+        \\$ t_i = \frac{1}{M_i} \bmod m_i $
+        \\$ ans \equiv \sum\limits_{i = 1}^{n} a_i t_i M_i \pmod M $
+    \subsection*{ex-Euclid解二元中国剩余定理}
+        返回是否可行，余数和模数结果为$ r_1 $, $ m_1 $
+        \myminted{cpp}{math/chinese_remainder_theorem.cpp}
 \section{线性同余不等式\ \small(Durandal)}
     必须满足$ 0 \leq d < m $, $ 0 \leq l \leq r < m $，返回$ \min\lbrace x \geq 0 \mid l \leq x \cdot d \bmod m \leq r \rbrace $，无解返回$ -1 $ 
     \myminted{cpp}{math/linear_congruence_inequality.cpp}
@@ -48,18 +55,14 @@
     \subsection*{MTT\ \small(gy)}
         \myminted{cpp}{math/mtt.cpp}
     \subsection*{NTT\ \small(gy)}
-        \subsubsection*{NTT素数}
-            \begin{tabular}{l c r}
-                \hline
-                Prime & $ G $ & $ 2^k $\\\hline
-                $ 167772161 $ & $ 3 $ & $ 33554432 $\\\hline
-                $ 469762049 $ & $ 3 $ & $ 67108864 $\\\hline
-                $ 998244353 $ & $ 3 $ & $ 8388608 $\\\hline
-                $ 1004535809 $ & $ 3 $ & $ 2097152 $\\\hline
-            \end{tabular}
-        \subsubsection*{三模数NTT}
-            $ ans = ret_1 * (\frac{1}{mod_2 * mod_3} \bmod mod_1) + ret_2 * (\frac{1}{mod_3 * mod_1} \bmod mod_2) + ret_3 * (\frac{1}{mod_1 * mod_2} \bmod mod_3) $
-        \subsubsection*{实现}
+        \begin{tabular}{l c r}
+            \hline
+            Prime & $ G $ & $ 2^k $\\\hline
+            $ 167772161 $ & $ 3 $ & $ 33554432 $\\\hline
+            $ 469762049 $ & $ 3 $ & $ 67108864 $\\\hline
+            $ 998244353 $ & $ 3 $ & $ 8388608 $\\\hline
+            $ 1004535809 $ & $ 3 $ & $ 2097152 $\\\hline
+        \end{tabular}
         \myminted{cpp}{math/ntt.cpp}
     \subsection*{FWT\ \small(lhy)}
         \myminted{cpp}{math/fwt.cpp}
