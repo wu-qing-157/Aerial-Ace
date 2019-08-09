@@ -5,7 +5,8 @@ void prepare(int len) {
     int x = 0;
     for (nn = 1; nn < len; nn <<= 1) x++;
     for (int i = 1; i < nn; i++) rev[i] = (rev[i >> 1] >> 1) | ((i & 1) << (x - 1));
-    for (int i = 0; i < nn; i++) w[i] = pow(G, (MOD - 1) / nn * i);
+    w[0] = 1, w[1] = pow(G, (MOD - 1) / nn);
+    for (int i = 2; i < nn; i++) w[i] = w[i - 1] * w[1] % MOD;
     invn = pow(nn, MOD - 2);
 }
 
