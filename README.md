@@ -6,3 +6,5 @@ Team Reference Material
 + Ternary Ring
 ## Training
 Training Files (exluding executable files)
+## TODO
++ Yang's Table
