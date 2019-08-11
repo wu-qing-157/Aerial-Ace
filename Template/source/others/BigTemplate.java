@@ -1,41 +1,6 @@
-import java.io.*;
 import java.math.*;
-import java.util.*;
 
-public class Template {
-    // Input
-    private static BufferedReader reader;
-    private static StringTokenizer tokenizer;
-
-    private static String next() {
-        try {
-            while (tokenizer == null || !tokenizer.hasMoreTokens())
-                tokenizer = new StringTokenizer(reader.readLine());
-        } catch (IOException e) {
-            // do nothing
-        }
-        return tokenizer.nextToken();
-    }
-
-    private static int nextInt() {
-        return Integer.parseInt(next());
-    }
-
-    private static double nextDouble() {
-        return Double.parseDouble(next());
-    }
-
-    private static BigInteger nextBigInteger() {
-        return new BigInteger(next());
-    }
-
-    public static void main(String[] args) {
-        reader = new BufferedReader(new InputStreamReader(System.in));
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNext())
-            scanner.next();
-    }
-
+public class BigTemplate {
     // BigInteger & BigDecimal
     private static void bigDecimal() {
         BigDecimal a = BigDecimal.valueOf(1.0);
@@ -74,51 +39,6 @@ public class Template {
                 r = m;
         }
         return l;
-    }
-
-    // Collections
-    private static void arrayList() {
-        List<Integer> list = new ArrayList<>();
-        // Generic array is banned
-        List[] lists = new List[100];
-        lists[0] = new ArrayList<Integer>();
-        // for List<Integer>, remove(Integer) stands for element, while remove(int) stands for index
-        list.remove(list.get(1));
-        list.remove(list.size() - 1);
-        list.clear();
-        Queue<Integer> queue = new LinkedList<>();
-        // return the value without popping
-        queue.peek();
-        // pop and return the value
-        queue.poll();
-        Queue<Integer> priorityQueue = new PriorityQueue<>();
-        Deque<Integer> deque = new ArrayDeque<>();
-        deque.peekFirst();
-        deque.peekLast();
-        deque.pollFirst();
-        TreeSet<Integer> set = new TreeSet<>();
-        TreeSet<Integer> anotherSet = new TreeSet<>(Comparator.reverseOrder());
-        set.ceiling(1);
-        set.floor(1);
-        set.lower(1);
-        set.higher(1);
-        set.contains(1);
-        HashSet<Integer> hashSet = new HashSet<>();
-        HashMap<String, Integer> map = new HashMap<>();
-        map.put("", 1);
-        map.get("");
-        map.forEach((string, integer) -> System.out.println(string + integer));
-        TreeMap<String, Integer> treeMap = new TreeMap<>();
-        Arrays.sort(new int[10]);
-        Arrays.sort(new Integer[10], (a, b) -> {
-            if (a.equals(b)) return 0;
-            if (a > b) return -1;
-            return 1;
-        });
-        Arrays.sort(new Integer[10], Comparator.comparingInt((a) -> (int) a).reversed());
-        long a = 1_000_000_000_000_000_000L;
-        int b = Integer.MAX_VALUE;
-        int c = 'a';
     }
 
     private static class BigFraction {

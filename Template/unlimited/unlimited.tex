@@ -83,6 +83,7 @@
 %\setlength{\cftaftertoctitleskip}{1pt}
 
 \begin{document}
+    % Title for unlimited version
     \begin{titlepage}
         \centering
         \rule{\linewidth}{0.5mm}\\[0.4cm]
@@ -91,15 +92,23 @@
         {\textit {\small (unlimited version)}}\\[0.4cm]
         \rule{\linewidth}{0.5mm}
         \vfill
-        \includegraphics[scale=0.4]{Platelet.jpg}
+        \includegraphics[scale=3]{pictures/aerial-ace.jpg}
         \vfill
         \makebox[1.6cm]{\Large 顾 \hfill 逸}\\[0.1cm]
         \makebox[1.6cm]{\Large 陈 \hfill 彤}\\[0.1cm]
         \makebox[1.6cm]{\Large 陈 \hfill 雪 \hfill 阳}\\[0.4cm]
+        \includegraphics[scale=0.4]{pictures/jetbrains.png}
+        \includegraphics[scale=0.4]{pictures/icpc.png}
+        \includegraphics[scale=0.4]{pictures/sjtu.png}\\
         \rule{\linewidth}{0.3mm}\\[0.4cm]
         \small{Shanghai Jiao Tong University, 2019}
     \end{titlepage}
-
+    \cleardoublepage
+    \setcounter{page}{1}
+    % TOC for unlimited version
+    \tableofcontents
+    \cleardoublepage
+    \setcounter{page}{1}
     % Title & TOC for limited version
     %\clearpage
     %\setcounter{page}{1}
@@ -112,12 +121,6 @@
     %\begin{multicols}{2}
         %\tableofcontents
     %\end{multicols}
-    % TOC for unlimited version
-    \cleardoublepage
-    \setcounter{page}{1}
-    \tableofcontents
-    \cleardoublepage
-    \setcounter{page}{1}
 
     \mychapter{Graph Theory}{graph_theory.tex}
     \mychapter{Math}{math.tex}
@@ -125,7 +128,8 @@
     \mychapter{String}{string.tex}
     \mychapter{Data Structure}{data_structure.tex}
     \mychapter{Others}{others.tex}
-    \vfill
-    \centerline{\includegraphics[scale=0.2]{Platelet.jpg}}
-    \vfill
+    % Picture for limited version
+    %\vfill
+    %\centerline{\includegraphics[scale=1]{aerial-ace.jpg}}
+    %\vfill
 \end{document}
