@@ -88,45 +88,14 @@ bool operator < (const L &l0, const L &l1) {
 bool check(const L &u, const L &v, const L &w) {
 	return w.onLeft(intersect(u, v));
 }
-bool intersection(vector<L> &l) {
-	sort(l.begin(), l.end());
-	deque<L> q;
-	for (int i = 0; i < (int) l.size(); ++i) {
-		if (i && sameDir(l[i], l[i - 1])) continue;
-		while (q.size() > 1 && !check(q[q.size() - 2], q[q.size() - 1], l[i]))
-			q.pop_back();
-		while (q.size() > 1 && !check(q[1], q[0], l[i]))
-			q.pop_front();
-		q.push_back(l[i]);
-	}
-	while (q.size() > 2 && !check(q[q.size() - 2], q[q.size() - 1], q[0]))
-		q.pop_back();
-	while (q.size() > 2 && !check(q[1], q[0], q[q.size() - 1]))
-		q.pop_front();
-	vector<P> ret;
-	for (int i = 0; i < (int) q.size(); ++i)
-		ret.push_back(intersect(q[i], q[(i + 1) % q.size()]));
-	return ret.size() > 2;
-}
-db cost[20][20], len[20], minx[20], maxx[20];
-vector<P> v[20];
+db cost[20][20], len[20], minx[20], maxx[20], H;
+vector<P> v[20], left[20], right[20], p1, p2;
 const db oo = 1e11;
-
-inline bool check(db x, int i1, int i2)
-{
-	vector<L> l; vector<P> p1 = v[i1], p2 = v[i2];
-	P delta1 = P(-minx[i1], 0), delta2 = P(x - maxx[i2], 0);
-	if (maxx[i1] - minx[i1] < minx[i2] + x - maxx[i2]) return 0;
-	for (int i = 0, _ = p1.size(); i < _; ++i)
-		l.push_back(L(p1[i] + delta1, p1[(i + 1) % _] + delta1));
-	for (int i = 0, _ = p2.size(); i < _; ++i)
-		l.push_back(L(p2[i] + delta2, p2[(i + 1) % _] + delta2));
-	return intersection(l);
-}
 db f[1 << 15][20];
 int main()
 {
 	int n; scanf("%d", &n);
+	H = 0;
 	for (int i = 1; i <= n; ++i)
 	{
 		int k; scanf("%d", &k);
@@ -138,21 +107,66 @@ int main()
 			v[i].push_back(P(x, y));
 			cmin(minx[i], x);
 			cmax(maxx[i], x);
+			cmax(H, y);
 		}
 		len[i] = maxx[i] - minx[i];
+		// printf("len[%d] = %lf\n", i, len[i] );
+		bool dir = 0;
+		for (int j = 1; j < k; ++j)
+		{
+			if (dir) left[i].push_back(v[i][j]);
+			else right[i].push_back(v[i][j]);
+			if (v[i][j].y == H && !dir) dir = 1;
+		}
+		left[i].push_back(v[i][0]);
+/*
+		puts("left");
+		for (auto poi : left[i]) printf("%lf %lf\n", poi.x, poi.y );
+		puts("right");
+		for (auto poi : right[i]) printf("%lf %lf\n", poi.x, poi.y );
+*/
+		std::reverse(left[i].begin(), left[i].end());
 	}
+
+// puts("---------------");
 	for (int i = 1; i <= n; ++i)
 		for (int j = 1; j <= n; ++j)
 		{
 			if (i == j) continue;
-			db left = 0, right = 4e8;
-			while (right - left > 1e-4)
+			db dist = oo; p1.clear(); p2.clear();
+			for (auto poi : right[i]) p1.push_back(P(poi.x - minx[i], poi.y));
+			for (auto poi : left[j]) p2.push_back(P(len[i] + len[j] + poi.x - maxx[j], poi.y));
+
+/*
+			printf("work %d %d\n", i, j);
+			puts("p1");
+			for (auto poi : p1) printf("%lf %lf\n", poi.x, poi.y );
+			puts("p2");
+			for (auto poi : p2) printf("%lf %lf\n", poi.x, poi.y );
+*/
+			for (int ii = 0, jj = 0; ii < p1.size() || jj < p2.size(); )
 			{
-				db mid = (left + right) * 0.5;
-				if (check(mid, i, j)) left = mid;
-				else right = mid;
+				if (p1[ii].y < p2[jj].y)
+				{
+					P dir_vec = (p2[jj] - p2[jj - 1]) * (p1[ii].y - p2[jj - 1].y) / (p2[jj].y - p2[jj - 1].y);
+					dir_vec = p2[jj - 1] + dir_vec;
+					cmin(dist, dir_vec.x - p1[ii].x);
+					++ii;
+				}
+				else if (p1[ii].y > p2[jj].y)
+				{
+					P dir_vec = (p1[ii] - p1[ii - 1]) * (p2[jj].y - p1[ii - 1].y) / (p1[ii].y - p1[ii - 1].y);
+					dir_vec = p1[ii - 1] + dir_vec;
+					cmin(dist, p2[jj].x - dir_vec.x);
+					++jj;
+				}
+				else
+				{
+					cmin(dist, p2[jj].x - p1[ii].x);
+					++ii; ++jj;
+				}
 			}
-			cost[i][j] = left - len[i];
+			cost[i][j] = len[j] - dist;
 		}
 	/*for (int i = 1; i <= n; ++i, puts(""))
 		for (int j = 1; j <= n; ++j)
