@@ -31,6 +31,10 @@ struct point {
     number len() const {
         return _sqrt(len2());
     }
+    bool sgn() {
+        if (sgn(y) == 0) return sgn(x) >= 0;
+        return sgn(y) >= 0;
+    }
     point unit() const {
         return point(x / len(), y / len());
     }
@@ -56,10 +60,21 @@ struct point {
     friend number det(const point &a, const point &b) {
         return a.x * b.y - a.y * b.x;
     }
-    friend number operator==(const point &a, const point &b) {
+    friend bool operator==(const point &a, const point &b) {
         return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0;
     }
 };
+
+bool polar_cmp(const point &a, const point &b) {
+    // These two lines can be omitted if (0, 0) never appears
+    if (b == point()) return false;
+    if (a == point()) return true;
+    // In [0, 2*pi)
+    if (a.sgn() != b.sgn()) return a.sgn();
+    if (sgn(det(a, b)) != 0) return sgn(det(a, b)) > 0;
+    // a == b or add other condition
+    return false;
+}
 
 number dis2(const point &a, const point &b) {
     return (a - b).len2();
@@ -71,11 +86,22 @@ number dis(const point &a, const point &b) {
 struct line {
     point a, b;
     line() {}
-    line(point a, point b) : a(a), b(b) {}
+    line(point _a, point _b) : a(_a), b(_b) {
+        /* for polar sort */ if (!(b - a).sgn()) std::swap(a, b);
+    }
     point value() const {
         return b - a;
     }
 };
+
+bool polar_cmp(const line &a, const line &b) {
+    if (sgn(det(a.value(), b.value())) != 0)
+        return sgn(det(a.value(), b.value())) > 0;
+    if (sgn(det(a.value(), b.a - a.a)) != 0)
+        return sgn(det(a.value(), b.a - a.a)) > 0;
+    // a == b or add other condition
+    return false;
+}
 
 bool point_on_line(const point &p, const line &l) {
     return sgn(det(p - l.a, p - l.b)) == 0;
