@@ -63,3 +63,9 @@
     \myminted{cpp}{data_structure/kd_tree.cpp}
 \section{DLX\ \small(Nightfall)}
     \myminted{cpp}{data_structure/dlx.cpp}
+\section{数据结构知识\ \small(gy)}
+    \subsection*{Young Tableau}
+        如果$ a_{i, j} $没有元素，则$ a_{i + 1, j} $没有元素，否则要么$ a_{i + 1, j} $没有元素，要么$ a_{i + 1, j} > a_{i, j} $，对$ a_{i, j + 1} $有同样要求，则称该矩阵为杨氏矩阵。\\
+        记$ hook_{i, j} $表示该元素上面和右边的元素个数之和。\\
+        对于$ 1 $ 到 $ n $组成的杨氏矩阵，固定形状的杨氏矩阵个数为$ cnt = \frac{n!}{\prod\limits_{ij} (hook_{i, j} + 1)} $。\\
+        对于$ 1 $ 到 $ n $组成的杨氏矩阵，所有形状的杨氏矩阵个数满足：$ F(1) = 1 $, $ F(2) = 2 $, $ F(n) = F(n - 1) + (n - 1) F(n - 2), (n > 2) $。
