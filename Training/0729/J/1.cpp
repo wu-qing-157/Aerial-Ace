@@ -36,7 +36,7 @@ struct Tuple {
 } ans[N], tr[N];
 Tuple query(int x)
 {
-	par ret = Tuple(0, 0, 0);
+	Tuple ret = Tuple(0, 0, 0);
 	for (; x; x -= x & -x) cmax(ret, tr[x]);
 	return ret;
 }
@@ -44,7 +44,7 @@ void modify(int x, par v)
 {
 	for (; x <= ccc; x += x & -x) cmax(tr[x], v);
 }
-std::vector<int> ansv;
+int ansv[maxn], ansnum;
 void work(std::vector<info> t)
 {
 	std::sort(t.begin(), t.end());
@@ -52,7 +52,7 @@ void work(std::vector<info> t)
 	{
 		while (j < t.size() && t[i].a == t[j].a) ++j;
 		for (int k = i; k < j; ++k)
-			ans[k] = query(t[k].b - 1), ++ans[k].a;
+			ans[k] = query(t[k].b - 1), ++ans[k].a, cmax(ansnum, ans[k].a);
 		for (int k = i; k < j; ++k)
 			modify(t[k].b, Tuple(ans[k].a, ans[k].id, k));
 	}
