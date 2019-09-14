@@ -155,7 +155,7 @@
         $ B_n $表示基数为$ n $的集合的划分方案数
         \\$ B_i = \begin{cases}
             1 & i = 0\\
-            \sum\limits_{k = 0}^{n} \binom{n}{k} B_k & i > 0
+            \sum\limits_{k = 0}^{i - 1} \binom{i - 1}{k} B_k & i > 0
         \end{cases} $
         \\$ B_n = \sum\limits_{k = 0}^{n} {n \brace k} $
         \\$ B_{p^m + n} \equiv m B_n + B_{n + 1} \pmod p $
