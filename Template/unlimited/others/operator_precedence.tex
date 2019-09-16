@@ -1,0 +1,59 @@
+\begin{tabular}{|c|c|c|}
+    \hline
+    Precedence & Associativity & Operator\\
+    \hline
+    1 & L & $ :: $ \\
+    \hline
+    \multirow{5}{*}{2} & \multirow{5}{*}{L} & Suffix$ ++ $ Suffix$ -- $ \\
+    && Functional cast \\
+    && Function call \\
+    && Subscript$ [] $ \\
+    && Member access . -> \\
+    \hline
+    \multirow{10}{*}{3} & \multirow{10}{*}{R} & Prefix$ ++ $ Prefix$ -- $ \\
+    && Unary$ + $ Unary$ - $ \\
+    && ! \~{} \\
+    && (type) \\
+    && *a \\
+    && \&a \\
+    && sizeof \\
+    && co\_await \\
+    && new new[] \\
+    && delete delete[] \\
+    \hline
+    4 & L & Pointer-to-member .* ->* \\
+    \hline
+    5 & L & * / \% \\
+    \hline
+    6 & L & Binary$ + $ Binary$ - $ \\
+    \hline
+    7 & L & $<<$ $>>$ \\
+    \hline
+    8 & L & <=> (C++20) \\
+    \hline
+    9 & L & < <= > >= \\
+    \hline
+    10 & L & == != \\
+    \hline
+    11 & L & Bitwise\& \\
+    \hline
+    12 & L & Bitwise\^{} \\
+    \hline
+    13 & L & Bitwise| \\
+    \hline
+    14 & L & Logical\&\& \\
+    \hline
+    15 & L & Logical|| \\
+    \hline
+    \multirow{8}{*}{16} & \multirow{8}{*}{R} & Ternary conditional ?: \\
+    && throw \\
+    && co\_yield \\
+    && = \\
+    && $ += $ $ -= $ \\
+    && *= /= \%= \\
+    && $<<=$ $>>=$ \\
+    && \&= \^{}= |= \\
+    \hline
+    17 & L & , \\
+    \hline
+\end{tabular}

@@ -1,17 +1,24 @@
 \section{莫队\ \small(ct)}
     \myminted{cpp}{data_structure/mo_dui.cpp}
+
 \section{ST表\ \small(ct)}
     \myminted{cpp}{data_structure/st_table.cpp}
+
 \section{长链剖分\ \small(ct)}
     \myminted{cpp}{data_structure/long_chain.cpp}
+
 \section{DSU\ \small(ct)}
     \myminted{cpp}{data_structure/dsu_on_tree.cpp}
+
 \section{带权并查集\ \small(ct)}
     \myminted{cpp}{data_structure/union_find_weighted.cpp}
+
 \section{可并堆\ \small(ct)}
     \myminted{cpp}{data_structure/mergeable_heap.cpp}
+
 \section{Splay\ \small(ct)}
     \myminted{cpp}{data_structure/splay.cpp}
+
 \section{线段树\ \small(ct)}
     \subsection*{zkw线段树}
         $ 0 $-based
@@ -36,33 +43,43 @@
         \\Maintain的时候，如果$ Cover > 0 $，$ Len $直接为区间长
         \\否则从左右子树递推$ Len $
         \\修改的时候直接改$ Cover $就好
+
 \section{Splay\ \small(ct)}
     \subsection*{Splay(指针版)}
         \myminted{cpp}{data_structure/splay.cpp}
     \subsection*{维修序列}
         \myminted{cpp}{data_structure/splay_arr.cpp}
+
 \section{Treap\ \small(ct)}
     \myminted{cpp}{data_structure/treap.cpp}
+
 \section{二进制分组\ \small(ct)}
     用线段树维护时间的操作序列，每次操作一个一个往线段树里面插，等到一个线段被插满的时候用归并来维护区间的信息。查询的时候如果一个线段没有被插满就递归下去。定位到一个区间的时候在区间里面归并出来的信息二分。
     \myminted{cpp}{data_structure/binary_group.cpp}
+
 \section{CDQ分治\ \small(ct)}
     \myminted{cpp}{data_structure/cdq_divide.cpp}
+
 \section{Bitset\ \small(ct)}
     \myminted{cpp}{data_structure/bitset.cpp}
+
 \section{斜率优化\ \small(ct)}
     对于斜截式$ y = k x + b $，如果把$ k_i $看成斜率，那dp时需要最小化截距，把斜截式转化为$ b_i = - k_i x_j + y_j $，就可以把可以转移到这个状态的点看作是二维平面上的点$ (- x_j, y_j) $，问题转化为了在平面上找一个点使得斜率为$ k_i $的直线的截距最小。这样的点一定在凸包上，这样的点在凸包上和前一个点的斜率$ \leq k_i$，和后面一个点的斜率$ \geq k_i $。这样就可以在凸包上二分来加速转移。当点的横坐标$ x_i $和斜率$ k_i $都是单调的，还可以用单调队列来维护凸包。
     \subsection*{单调队列}
         \myminted{cpp}{data_structure/slope_optimize_queue.cpp}
     \subsection*{线段树}
         \myminted{cpp}{data_structure/slope_optimize_segment.cpp}
+
 \section{树分块\ \small(ct)}
     树分块套分块：给定一棵有点权的树，每次询问链上不同点权个数
     \myminted{cpp}{data_structure/tree_block.cpp}
+
 \section{KD\ tree\ \small(lhy)}
     \myminted{cpp}{data_structure/kd_tree.cpp}
+
 \section{DLX\ \small(Nightfall)}
     \myminted{cpp}{data_structure/dlx.cpp}
+
 \section{数据结构知识\ \small(gy)}
     \subsection*{Young Tableau}
         如果$ a_{i, j} $没有元素，则$ a_{i + 1, j} $没有元素，否则要么$ a_{i + 1, j} $没有元素，要么$ a_{i + 1, j} > a_{i, j} $，对$ a_{i, j + 1} $有同样要求，则称该矩阵为杨氏矩阵。\\
