@@ -1,18 +1,18 @@
 /Training/**/*
 !/Training/**/*/
-!/Training/**/in
 !/Training/**/source
 !/Training/**/*.*
 /Training/**/*.class
 /Training/**/a.out
+/Training/**/META-INF/
 
 /Homework/**/*
 !/Homework/**/*/
-!/Homework/**/in
 !/Homework/**/source
 !/Homework/**/*.*
 /Homework/**/*.class
 /Homework/**/a.out
+/Homework/**/META-INF/
 
 *.toc
 *.aux
