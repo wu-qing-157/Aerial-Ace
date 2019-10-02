@@ -7,6 +7,7 @@ Team Reference Material
 + 扩展欧拉定理
 + $ Min_{25} $
 + 长链剖分O(1)求k-祖先
++ Circle Union (with Green)
 ## Training
 Training Files (exluding executable files, in files, table files)
 ## TODO
