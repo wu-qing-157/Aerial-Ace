@@ -1,5 +1,5 @@
 using number = long double;
-const number eps = 1e-8;
+const number eps = 1e-8, pi = std::acos(-1);
 
 number _sqrt(number x) {
     return std::sqrt(std::max(x, (number) 0));
@@ -147,6 +147,10 @@ struct circle {
     number r;
     circle() {}
     circle(point o, number r) : o(o), r(r) {}
+
+    friend bool operator==(const circle &a, const circle &b) {
+        return a.o == b.o && cmp(a.r, b.r) == 0;
+    }
 };
 
 bool intersect(const line &l, const circle &a, point &p1, point &p2) {

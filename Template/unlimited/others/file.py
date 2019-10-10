@@ -1,6 +1,0 @@
-input_file = open("hello.in", "r")
-output_file = open("hello.out", "w")
-[a, b] = map(int, input_file.readline().split(" "))
-output_file.write("{}\n".format(a + b))
-input_file.close()
-output_file.close()
