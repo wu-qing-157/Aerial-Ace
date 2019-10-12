@@ -1,5 +1,5 @@
 \subsection*{Nim}
-    \begin{tabular}{l c c}
+    \begin{longtable}{l c c}
         \toprule
         Name & Pick Limit & $ SG(n) $ \\
         \midrule
@@ -17,7 +17,7 @@
         Staircase Nim & Move from $ a_i $ to $ a_i - 1 $ & win - $ \bigoplus SG(a_{2i + 1}) > 0 $\\
         Lasker's Nim & $ [1, a_i] $ or split $ a_i $ & $ \begin{cases} n & n \bmod 4 = 1, 2 \\ n + 1 & n \bmod 4 = 3 \\ n - 1 & n \bmod 4 = 0 \end{cases} $\\
         \bottomrule
-    \end{tabular}
+    \end{longtable}
 \subsection*{Kayles}
     一行$ n $个石子，每次可以取走一个或相邻两个还未被取走的，$ SG $函数从$ n = 72 $开始以$ 12 $为循环节
 \subsection*{Dawson's chess}

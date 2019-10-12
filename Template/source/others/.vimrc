@@ -14,6 +14,8 @@ au filetype cpp se cin fdm=syntax mp=make\ %< | cm @@ ./%< | cm ## %<
 au filetype java se cin mp=javac\ % | cm @@ java %< | cm ## %<.class
 au filetype python se si fdm=indent mp=echo\ % | cm @@ pypy3 % | cm ## .
 
+au filetype cpp sy keyword Type number point line circle info data
+
 nm <f12> :%s/^\( *\)\/\/ freopen/\1freopen<cr>
 nm <s-f12> :%s/^\( *\)freopen/\1\/\/ freopen<cr>
 nm <c-s-f12> /^int main() {<cr>ofreopen("<filename>.in", "r", stdin);<cr>freopen("<filename>.out", "w", stdout);<esc>:%s/<filename>/
