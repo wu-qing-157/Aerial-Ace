@@ -2,15 +2,15 @@
 #include <cstring>
 #include <algorithm>
 #include <vector>
-
-#define maxn 800010
-#define maxm 3000010
+ 
+#define maxn 80010
+#define maxm 300010
 #define cmin(_a, _b) (_a > (_b) ? _a = (_b) : 0)
 typedef long long ll;
 ll A[maxn], B[maxn], C[maxn];
 int Q;
 struct P {
-	ll x, y;
+	int x, y;
 	inline P operator - (const P &that) const {return (P) {x - that.x, y - that.y};}
 	inline ll operator ^ (const P &that) const {return 1ll * x * that.y - 1ll * y * that.x;}
 } ;
@@ -32,7 +32,7 @@ void dfs(int x)
 	inv[x] = timer;
 }
 struct Opt {
-	int type; ll val; int x, id;
+	int type, val, x, id;
 	inline bool operator < (const Opt &that) const {return val < that.val || (val == that.val && type < that.type);}
 } q[maxm], t[maxm];
 inline bool cmp(const Opt &a, const Opt &b)
@@ -48,10 +48,6 @@ inline ll cmp(const P &a, const P &b, const P &c)
 {
 	return (b - a) ^ (c - a);
 }
-inline double slope(const P &a, const P &b)
-{
-	return (b.y - a.y) / (double) (b.x - a.x);
-}
 struct Seg {
 	std::vector<P> v;
 	int it;
@@ -59,14 +55,14 @@ struct Seg {
 	{
 		int top = v.size();
 		P *v = this -> v.data() - 1;
-		while (top > 1 && slope(v[top - 1], v[top]) >= slope(v[top - 1], that)) --top;
+		while (top > 1 && cmp(v[top - 1], v[top], that) <= 0) --top;
 		this -> v.erase(this -> v.begin() + top, this -> v.end());
 		this -> v.push_back(that);
 	}
 	inline ll query(ll k)
 	{
 		if (v.empty()) return inf;
-		while (it < v.size() - 1 && slope(v[it], v[it + 1]) <= k) ++it;
+		while (it < v.size() - 1 && v[it + 1].y - v[it].y <= k * (v[it + 1].x - v[it].x)) ++it;
 		return v[it].y - v[it].x * k;
 	}
 	inline void clear()
@@ -112,7 +108,7 @@ void solve(int left, int right)
 	int mid = left + right >> 1;
 	solve(left, mid);
 	solve(mid + 1, right);
-
+ 
 	// printf("ll %d right %d\n", left, right);
 	for (int i = mid + 1; i <= right; ++i)
 		if (q[i].type == 1)
@@ -147,20 +143,20 @@ void solve(int left, int right)
 int main()
 {
 	int qq; scanf("%d%d", &n, &qq);
-	for (int i = 1; i <= n; ++i) scanf("%lld", A + i);
-	for (int i = 1; i <= n; ++i) scanf("%lld", B + i);
-	for (int i = 1; i <= n; ++i) scanf("%lld", C + i), q[++Q] = (Opt) {1, C[i], i, 0};
+	for (int i = 1; i <= n; ++i) scanf("%d", A + i);
+	for (int i = 1; i <= n; ++i) scanf("%d", B + i);
+	for (int i = 1; i <= n; ++i) scanf("%d", C + i), q[++Q] = (Opt) {1, C[i], i, 0};
 	for (int i = 1; i < n; ++i)
 	{
 		int a, b; scanf("%d%d", &a, &b);
 		link(a, b);
 	}
+	memset(ans, 63, sizeof (ans));
 	dfs(1);
 	for (int i = 1; i <= qq; ++i)
 	{
-		int v; ll t; scanf("%d%lld", &v, &t);
+		int v, t; scanf("%d%d", &v, &t);
 		q[++Q] = (Opt) {0, t, v, i};
-		ans[i] = inf;
 	}
 	std::sort(q + 1, q + Q + 1);
 	// for (int i = 1; i <= Q; ++i) printf("%d %d %d\n", q[i].type, q[i].val, q[i].x);
