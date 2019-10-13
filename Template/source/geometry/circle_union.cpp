@@ -20,7 +20,7 @@ void circle_union() {
     });
     n = int(std::unique(a + 1, a + n + 1) - a - 1);
     for (int i = 1; i <= n; i++) {
-        int cnt = 0, opcnt = 0;;
+        int cnt = 0, opcnt = 0;
         for (int j = 1; j <= n; j++) if (i != j) {
             point delta = a[j].o - a[i].o;
             number d = delta.len();
