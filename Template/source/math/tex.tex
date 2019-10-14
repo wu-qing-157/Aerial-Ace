@@ -2,6 +2,20 @@
 %\newcommand{\Eularian}[2]{\left\langle\!\eularian{#1}{#2}\!\right\rangle}
 \newcommand{\Eularian}{\genfrac{\langle\!\langle}{\rangle\!\rangle}{0pt}{2}}
 
+\subsection*{扩展欧拉定理}
+    $ a^c \equiv \begin{cases} a^c & c < \phi(m) \\ a^{c \bmod \phi(m) + \phi(m)} & c \ge \phi(m) \end{cases} $
+
+\subsection*{类欧几里得算法}
+    $ f(a, b, c, n) = \sum\limits_{i=0}^n \lfloor \frac{ai + b}{c} \rfloor, g(a, b, c, n) = \sum\limits_{i=0}^n i \lfloor \frac{ai + b}{c} \rfloor, h(a, b, c, n) = \sum\limits_{i=0}^n \lfloor \frac{ai + b}{c} \rfloor ^2, m = \lfloor \frac{an + b}{c} \rfloor $
+    \\$a \ge c$ or $b \ge c$:
+    \\$f(a, b, c, n) = f(a \bmod c, b \bmod c, c, n) + \frac{1}{2} n (n + 1) \lfloor \frac{a}{c} \rfloor + (n + 1) \lfloor \frac{b}{c} \rfloor $
+    \\$g(a, b, c, n) = g(a \bmod c, b \bmod c, c, n) + \frac{1}{6} n (n + 1) (2n + 1) \lfloor \frac{a}{c} \rfloor + \frac{1}{2} n (n + 1) \lfloor \frac{b}{b} \rfloor $
+    \\$h(a, b, c, n) = 2 \lfloor \frac{b}{c} \rfloor f(a \bmod c, b \bmod c, c, n) + 2 \lfloor \frac{a}{c} \rfloor g(a \bmod c, b \bmod c, c, n) + h(a \bmod c, b \bmod c, c, n) + \frac{1}{6} n (n + 1) (2n + 1) \lfloor \frac{a}{c} \rfloor^2 + (n + 1) \lfloor \frac{b}{c} \rfloor^2 + n (n + 1) \lfloor \frac{a}{c} \rfloor \lfloor \frac{b}{c} \rfloor $
+    \\$ a < c $ and $ b < c $:
+    \\$ f(a, b, c, n) = nm - f(c, c - b - 1, a, m - 1) $
+    \\$ g(a, b, c, n) = \frac{1}{2} (nm(n + 1) - f(c, c - b - 1, a, m - 1) - h(c, c - b - 1, a, m - 1)) $
+    \\$ h(a, b, c, n) = nm(m + 1) - f(a, b, c, n) - 2f(c, c - b - 1, a, m - 1) - 2g(c, c - b - 1, a, m - 1) $
+
 \subsection*{原根}
     当$ \gcd(a, m) = 1 $时，使$ a^x \equiv 1 \pmod m $成立的最小正整数$ x $称为$ a $对于模$ m $的阶，计为$ \text{ord}_m(a) $。
     \\阶的性质：$ a^n \equiv 1 \pmod m $的充要条件是$ \text{ord}_m(a) \mid n $，可推出$ \text{ord}_m(a) \mid \psi(m) $。
