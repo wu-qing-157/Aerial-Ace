@@ -1,3 +1,9 @@
+#include <cassert>
+#include <cstdio>
+#include <vector>
+
+const int N = 20;
+int n, m, a[N], csize;
 std::vector<std::vector<double>> A;
 std::vector<double> b, c;
 
@@ -42,4 +48,46 @@ std::vector<double> simplex() {
         if (ix[i] < m - 1)
             x[ix[i]] = D[i - m][m];
     return x;
+}
+
+int main() {
+    static int T;
+    scanf("%d", &T);
+    for (int cas = 1; cas <= T; cas++) {
+        scanf("%d%d", &n, &m);
+        for (int i = 0; i < n; i++) scanf("%d", a + i);
+        csize = 0;
+        A.clear();
+        for (int i = 0; i < n; i++) A.emplace_back();
+        b.resize(n);
+        for (int i = 0; i < (1 << n); i++) {
+            int sum = 0;
+            for (int j = 0; j < n; j++) if (i & (1 << j)) sum += a[j];
+            if (sum > m) continue;
+            ++csize;
+            for (int j = 0; j < n; j++) A[j].push_back((i & (1 << j)) > 0);
+        }
+        for (int j = 0; j < n; j++) A[j].push_back(-1), b[j] = 0;
+        A.emplace_back(csize);
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < csize; j++)
+                A.back()[j] -= A[i][j];
+        A.back().push_back(n);
+        b.push_back(0);
+        std::vector<double> f1, f2;
+        for (int i = 0; i < csize; i++)
+            f1.push_back(1), f2.push_back(-1);
+        f1.push_back(0), f2.push_back(0);
+        A.emplace_back(std::move(f1));
+        A.emplace_back(std::move(f2));
+        b.push_back(1);
+        b.push_back(-1);
+        c.clear();
+        c.resize(csize);
+        c.push_back(1);
+
+        auto ret = simplex();
+        printf("Case #%d: %.10f\n", cas, ret[csize]);
+    }
+    return 0;
 }
