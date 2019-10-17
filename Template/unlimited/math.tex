@@ -8,8 +8,8 @@
     \subsection*{中国剩余定理}
         若$ m_1, m_2, \dots, m_n $两两互素，则方程组$ x \equiv a_i \pmod{m_i} $有解，且解可以由以下方法构造：
         \\$ M = \prod\limits_{i = 1}^{n} m_i $
-        \\$ M_i = \frac{M}{m_i} $
-        \\$ t_i = \frac{1}{M_i} \bmod m_i $
+        \\$ M_i = \dfrac{M}{m_i} $
+        \\$ t_i = \dfrac{1}{M_i} \bmod m_i $
         \\$ ans \equiv \sum\limits_{i = 1}^{n} a_i t_i M_i \pmod M $
     \subsection*{ex-Euclid解二元中国剩余定理}
         返回是否可行，余数和模数结果为$ r_1 $, $ m_1 $
@@ -70,32 +70,52 @@
             \item 求逆:
             \\$ A(x) B(x) \equiv 1 \pmod{x^t} \to A(x) (2B(x) - A(x) B^2(x)) \equiv 1 \pmod{x^{2t}} $
             \item 平方根:
-            \\$ A^2(x) \equiv B(x) \pmod{x^t} \to (\frac{B(x) + A^2(x)}{2A(x)})^2 \equiv B(x) \pmod{x^{2t}} $
+            \\$ A^2(x) \equiv B(x) \pmod{x^t} \to (\dfrac{B(x) + A^2(x)}{2A(x)})^2 \equiv B(x) \pmod{x^{2t}} $
             \item $ \ln $(常数项为1):
-            \\$ A(x) = \ln B(x) \to A'(x) = \frac{B'(x)}{B(x)} $
+            \\$ A(x) = \ln B(x) \to A'(x) = \dfrac{B'(x)}{B(x)} $
             \item $ \exp $(常数项为0):
             \\$ B(x) \equiv e^{A(x)} \pmod{x^t} \to B(x) (1 - \ln B(x) + A(x)) \equiv e^{A(x)} \pmod{x^{2t}} $
         \end{itemize}
         \myminted{cpp}{math/poly_operation.cpp}
 
-\section{杜教筛\ \small(ct)}
-    \noindent Dirichlet卷积：$ (f \ast g) (n) = \sum\limits_{d \mid n}^{} f(d) g(\frac{n}{d}) $
-    \\对于积性函数$ f(n) $，求其前缀和$ S(n) = \sum\limits_{i = 1}^{n} f(i) $
-    \\寻找一个恰当的积性函数$ g(n) $，使得$ g(n) $和$ (f \ast g) (n) $的前缀和都容易计算
-    \\则$ g(1) S(n) = \sum\limits_{i = 1}^{n} (f \ast g) (i) - \sum\limits_{i = 2}{n} g(i) S(\lfloor \frac{n}{i} \rfloor) $
-    \\$ \mu (n) $和$ \phi (n) $取$ g(n) = 1 $
-    \\两种常见形式：
-    \begin{itemize}[wide=0pt]
-        \item $ S(n) = \sum\limits_{i = 1}^{n} (f \cdot g) (i) $且$ g(i) $为完全积性函数
-            \\$ S(n) = \sum\limits_{i = 1}^{n} ((f \ast 1) \cdot g) (i) - \sum\limits_{i = 2}^{n} S(\lfloor \frac{n}{i} \rfloor) g(i) $
-        \item $ S(n) = \sum\limits_{i = 1}^{n} (f \ast g) (i) $
-            \\$ S(n) = \sum\limits_{i = 1}^{n} g (i) \sum\limits_{ij \leq n}^{} (f \ast 1) (j) - \sum\limits_{i = 2}^{n} S(\lfloor \frac{n}{i} \rfloor) $
-    \end{itemize}
-    \myminted{cpp}{math/du_jiao_sieve.cpp}
+\section{筛\ \small(ct,cxy,Nightfall)}
 
-\section{Extended\ Eratosthenes\ Sieve\ \small(Nightfall)}
-    一般积性函数的前缀和，要求：$ f(p) $为多项式
-    \myminted{cpp}{math/ex_eratosthenes_sieve.cpp}
+    \subsection*{杜教筛\ \small(ct)}
+        \noindent Dirichlet卷积：$ (f \ast g) (n) = \sum\limits_{d \mid n}^{} f(d) g(\dfrac{n}{d}) $
+        \\对于积性函数$ f(n) $，求其前缀和$ S(n) = \sum\limits_{i = 1}^{n} f(i) $
+        \\寻找一个恰当的积性函数$ g(n) $，使得$ g(n) $和$ (f \ast g) (n) $的前缀和都容易计算
+        \\则$ g(1) S(n) = \sum\limits_{i = 1}^{n} (f \ast g) (i) - \sum\limits_{i = 2}{n} g(i) S(\lfloor \dfrac{n}{i} \rfloor) $
+        \\$ \mu (n) $和$ \phi (n) $取$ g(n) = 1 $
+        \\两种常见形式：
+        \begin{itemize}[wide=0pt]
+            \item $ S(n) = \sum\limits_{i = 1}^{n} (f \cdot g) (i) $且$ g(i) $为完全积性函数
+                \\$ S(n) = \sum\limits_{i = 1}^{n} ((f \ast 1) \cdot g) (i) - \sum\limits_{i = 2}^{n} S(\lfloor \dfrac{n}{i} \rfloor) g(i) $
+            \item $ S(n) = \sum\limits_{i = 1}^{n} (f \ast g) (i) $
+                \\$ S(n) = \sum\limits_{i = 1}^{n} g (i) \sum\limits_{ij \leq n}^{} (f \ast 1) (j) - \sum\limits_{i = 2}^{n} S(\lfloor \dfrac{n}{i} \rfloor) $
+        \end{itemize}
+        \myminted{cpp}{math/du_jiao_sieve.cpp}
+
+    \subsection*{Extended\ Eratosthenes\ Sieve\ \small(Nightfall)}
+        一般积性函数的前缀和，要求：$ f(p) $为多项式
+        \myminted{cpp}{math/ex_eratosthenes_sieve.cpp}
+
+    \subsection*{Min25筛\ \small(cxy)}
+        \subsubsection*{Min25筛}
+            $O(\dfrac{n^\dfrac{3}{4}}{\log n})$求$\sum\limits_{i = 1}^n f(i)$，其中$f(i)$是积性函数且$f(p^e)$是关于$p$的低阶多项式
+            \\$g(n, j) = \sum\limits_{i = 1}^n [i~\text{is a prime or}~\min_p(i) > p_j] i^k$
+            \\$g(n, j) = g(n, j - 1) - p_j^k\left( g\left( \dfrac{n}{p_j}, j - 1 \right) - g\left( p_{j - 1}, j - 1 \right) \right)$
+            \\$g(n) = g(n, x)$，其中$p_x$是最后一个$\le \sqrt n$的素数
+            \\$sp_n = \sum\limits_{i = 1}^n p_i^k$
+            \\$S(n, x) = g(n) - sp_x + \sum\limits_{p_k^e \le n \wedge k > x} f(p_k^e) \left( S\left( \dfrac{n}{p_k^e}, k \right) + [e \ne 1] \right) $
+            \\$\sum\limits_{i = 1}^n = S(n, 0)$
+        \subsubsection*{实现$f(p^k) = p^k(p^k - 1)$}
+            \myminted{cpp}{math/min25.cpp}
+
+    \subsection*{洲阁筛\ \small(ct)}
+        \subsubsection*{实现区间$[a, b]$里有多少个数满足：含有至少一个$>p$的素因数}
+            \myminted{cpp}{math/zhou_sieve_1.cpp}
+        \subsubsection*{实现$\sum\limits_{i=1}^n \sum\limits_{j=1}^n \operatorname{sgcd}(i, j)^k$, 其中$\operatorname{sgcd}(i, j) = \begin{cases} 0 & \gcd(i, j) = 1 \\ \text{The second-largest common divisor of}~i~\text{and}~j & \text{otherwise} \end{cases}$}
+            \myminted{cpp}{math/zhou_sieve_2.cpp}
 
 \section{BSGS\ \small(ct,Durandal)}
     \subsection*{BSGS\ \small(ct)}
@@ -106,7 +126,7 @@
         \myminted{cpp}{math/ex_bsgs.cpp}
 
 \section{直线下整点个数\ \small(gy)}
-    必须满足$ a \geq 0 $, $ b \geq 0 $, $ m > 0 $，返回$ \sum\limits_{i=0}^{n-1} \frac{a + bi}{m} $
+    必须满足$ a \geq 0 $, $ b \geq 0 $, $ m > 0 $，返回$ \sum\limits_{i=0}^{n-1} \dfrac{a + bi}{m} $
     \myminted{cpp}{math/points_below_line.cpp}
 
 \section{Pell\ equation\ \small(gy)}
