@@ -1,3 +1,8 @@
+\newcommand{\lca}{\operatorname{LCA}}
+\newcommand{\depth}{\operatorname{depth}}
+\subsection*{树链的交}
+    记两条链分别为$( a_1, b_1 )$和$( a_2, b_2 )$，记$\lca(a_1, b_1) = c_1$，$\lca(a_2, b_2) = c_2$。记$\lca(a_1, a_2) = d_1, \lca(a_1, b_2) = d_2, \lca(b_1, a_2) = d_3, \lca(b_1, b_2) = d_4$。按深度排序后得$\depth(d_1) \le \depth(d_2) \le \depth(d_3) \le \depth(d_4), \depth(c_1) \le \depth(c_2)$。两条链有交集当且仅当$\depth(c_1) \le \depth(d1)$且$\depth(c_2) \le \depth(d3)$，此时两条链得交为$( d3, d4 )$
+
 \subsection*{Hall theorem}
     二分图$ G = (X, Y, E) $有完备匹配的充要条件是：对于$ X $的任意一个子集$ S $都满足$ \left| S \right| \leq \left| A(S) \right| $，$ A(S) $是$ Y $的子集，是$ S $的邻集（与$ S $有边的边集）。
 
@@ -7,7 +12,7 @@
     \\由序列得到树: 先将所有点的度赋初值为$ 1 $, 然后加上它的编号在Prufer序列中出现的次数, 得到每个点的度; 执行$ n − 2 $步, 第$ i $步选取具有最小标号的度为$ 1 $的点$ u $与$ v = p_i$相连, 得到树中的一条边, 并将$ u $和$ v $的度减$ 1 $。最后再把剩下的两个度为$ 1 $的点连边, 加入到树中。
     \\相关结论:
     \begin{itemize}[wide=0pt]
-        \item $ n $个点完全图, 每个点度数依次为$ d_1, d_2 , \dots, dn $，这样生成树的棵树为：$ \frac{(n - 2) !}{(d_1 - 1)! (d_2 - 1)! \dots (d_n - 1)!} $
+        \item $ n $个点完全图, 每个点度数依次为$ d_1, d_2 , \dots, dn $，这样生成树的棵树为：$ \dfrac{(n - 2) !}{(d_1 - 1)! (d_2 - 1)! \dots (d_n - 1)!} $
         \item 左边有$ n_1 $个点, 右边有$ n_2 $个点的完全二分图的生成树棵树为：$ n_1^{n_2 - 1} + n_2^{n_1 - 1} $
         \item $ m $个连通块, 每个连通块有$ c_i $个点, 把他们全部连通的生成树方案数：$ (\sum c_i)^{m - 2} \prod c_i $
     \end{itemize}
@@ -28,12 +33,12 @@
     \begin{itemize}[wide=0pt]
         \item 有根树计数
             \\$ a_1 = 1 $
-            \\$ a_{n + 1} = \frac{\sum\limits_{j = 1}^{n} j \cdot a_j \cdot S_{n, j}}{n} $
+            \\$ a_{n + 1} = \dfrac{\sum\limits_{j = 1}^{n} j \cdot a_j \cdot S_{n, j}}{n} $
             \\$ S_{n, j} = \sum\limits_{i = 1}^{n / j} a_{n + 1 - ij} = S_{n - j, j} + a_{n + 1 - j} $
         \item 无根树计数
             \\$ \begin{cases}
                 a_n - \sum\limits_{i = 1}^{n / 2} a_i a_{n - i} & n \text{ is odd}\\
-                a_n - \sum\limits_{i = 1}^{n / 2} a_i a_{n - i} + \frac{1}{2} a_{\frac{n}{2}} (a_{\frac{n}{2}} + 1) & n \text{ is even}
+                a_n - \sum\limits_{i = 1}^{n / 2} a_i a_{n - i} + \dfrac{1}{2} a_{\dfrac{n}{2}} (a_{\dfrac{n}{2}} + 1) & n \text{ is even}
             \end{cases} $
         \item 生成树计数
             \\Kirchhoff Matrix $ T = Deg − A $, $ Deg $是度数对角阵, $ A $是邻接矩阵。无向图度数矩阵是每个点度数; 有向图度数矩阵是每个点入度。邻接矩阵$ A[u][v] $表示$ u \to v $边个数, 重边按照边数计算, 自环不计入度数。
@@ -86,12 +91,12 @@
     水源$ S_1 $，水汇$ T_1 $，油源$ S_2 $，油汇$ T_2 $，每根管道流量共用，使流量和最大。
     \\建超级源$ S_1^\ast $，超级汇$ T_1^\ast $，连边$ S_1^\ast \to S_1 $，$ S_1^\ast \to S_2 $，$ T_1 \to T_1^\ast $，$ T_2 \to T_1^\ast $，设最大流为$ x_1 $。
     \\建超级源$ S_2^\ast $，超级汇$ T_2^\ast $，连边$ S_2^\ast \to S_1 $，$ S_2^\ast \to T_2 $，$ T_1 \to T_2^\ast $，$ S_2 \to T_2^\ast $，设最大流为$ x_2 $。
-    则最大流中水流量$ \frac{x_1 + x_2}{2} $，油流量$ \frac{x_1 - x_2}{2} $。
+    则最大流中水流量$ \dfrac{x_1 + x_2}{2} $，油流量$ \dfrac{x_1 - x_2}{2} $。
 
 \subsection*{最大权闭合子图}
     给定一个带点权的有向图，求其最大权闭合子图。
     \\从源点$ S $向每一条正权点连一条容量为权值的边，每个负权点向汇点$ T $连一条容量为权值绝对值的边，有向图原来的边容量为$ \infty $。求它的最小割，与源点$ S $连通的点构成最大权闭合子图，权值为\textit{正权值和}$ - $\textit{最小割}。
 
 \subsection*{最大密度子图}
-    给定一个无向图，求其一个子图，使得子图的边数$ \left| E \right| $和点数$ \left| V \right| $满足$ \frac{\left| E \right|}{\left| V \right|} $最大。
+    给定一个无向图，求其一个子图，使得子图的边数$ \left| E \right| $和点数$ \left| V \right| $满足$ \dfrac{\left| E \right|}{\left| V \right|} $最大。
     \\二分答案$ k $，使得$ \left| E \right| - k \left| V \right| \geq 0 $有解，将原图边和点都看作点，边$ (u, v) $分别向$ u $和$ v $连边求最大权闭合子图。

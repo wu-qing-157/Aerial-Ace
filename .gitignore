@@ -20,3 +20,4 @@ unlimited.pdf
 *.aux
 *.log
 *.pyg
+*:Zone.Identifier

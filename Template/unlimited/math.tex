@@ -1,10 +1,10 @@
-\section{int64相乘取模\ \small(Durandal)}
+\section{int64相乘取模~\small(Durandal)}
     \myminted{cpp}{math/int64_multiply_mod.cpp}
 
-\section{ex-Euclid\ \small(gy)}
+\section{ex-Euclid~\small(gy)}
     \myminted{cpp}{math/extend_gcd.cpp}
 
-\section{中国剩余定理\ \small(Durandal)}
+\section{中国剩余定理~\small(Durandal)}
     \subsection*{中国剩余定理}
         若$ m_1, m_2, \dots, m_n $两两互素，则方程组$ x \equiv a_i \pmod{m_i} $有解，且解可以由以下方法构造：
         \\$ M = \prod\limits_{i = 1}^{n} m_i $
@@ -15,24 +15,24 @@
         返回是否可行，余数和模数结果为$ r_1 $, $ m_1 $
         \myminted{cpp}{math/chinese_remainder_theorem.cpp}
 
-\section{线性同余不等式\ \small(Durandal)}
+\section{线性同余不等式~\small(Durandal)}
     必须满足$ 0 \leq d < m $, $ 0 \leq l \leq r < m $，返回$ \min\lbrace x \geq 0 \mid l \leq x \cdot d \bmod m \leq r \rbrace $，无解返回$ -1 $ 
     \myminted{cpp}{math/linear_congruence_inequality.cpp}
 
-\section{平方剩余\ \small(Nightfall)}
+\section{平方剩余~\small(Nightfall)}
     $ x^2 \equiv a \pmod p, 0 \leq a < p $
     \\返回是否存在解
     \\$ p $必须是质数, 若是多个单次质数的乘积可以分别求解再用CRT合并
     \\复杂度为$ O(\log n) $
     \myminted{cpp}{math/square_remainder.cpp}
 
-\section{组合数\ \small(Nightfall)}
+\section{组合数~\small(Nightfall)}
     \myminted{cpp}{math/ex_lucas.cpp}
 
-\section{高斯消元\ \small(ct)}
+\section{高斯消元~\small(ct)}
     \myminted{cpp}{math/gauss_elimination.cpp}
 
-\section{Miller\ Rabin\ \&\ Pollard\ Rho\ \small(gy)}
+\section{Miller~Rabin~\&~Pollard~Rho~\small(gy)}
     \begin{tabular}{l r}
         \hline
         Test Set & First Wrong Answer\\\hline
@@ -42,18 +42,21 @@
     \end{tabular}
     \myminted{cpp}{math/miller_rabin_and_pollard_rho.cpp}
 
-\section{$ O(m ^ 2 \log n) $线性递推\ \small(lhy)}
+\section{$ O(m ^ 2 \log n) $线性递推~\small(lhy)}
     \myminted{cpp}{math/linear_rec.cpp}
 
-\section{线性基\ \small(ct)}
+\section{Berlekamp~Massey~\small(NightFall)}
+    \myminted{cpp}{math/berlekamp_massey.cpp}
+
+\section{线性基~\small(ct)}
     \myminted{cpp}{math/linear_base.cpp}
 
-\section{多项式\ \small(lhy,ct,gy)}
-    \subsection*{FFT\ \small(ct)}
+\section{多项式~\small(lhy,ct,gy)}
+    \subsection*{FFT~\small(ct)}
         \myminted{cpp}{math/fft.cpp}
-    \subsection*{MTT\ \small(gy)}
+    \subsection*{MTT~\small(gy)}
         \myminted{cpp}{math/mtt.cpp}
-    \subsection*{NTT\ \small(gy)}
+    \subsection*{NTT~\small(gy)}
         \begin{tabular}{l c r}
             \hline
             Prime & $ G $ & $ 2^k $\\\hline
@@ -63,9 +66,9 @@
             $ 1004535809 $ & $ 3 $ & $ 2097152 $\\\hline
         \end{tabular}
         \myminted{cpp}{math/ntt.cpp}
-    \subsection*{FWT\ \small(lhy)}
+    \subsection*{FWT~\small(lhy)}
         \myminted{cpp}{math/fwt.cpp}
-    \subsection*{多项式操作\ \small(gy)}
+    \subsection*{多项式操作~\small(gy)}
         \begin{itemize}[wide=0pt]
             \item 求逆:
             \\$ A(x) B(x) \equiv 1 \pmod{x^t} \to A(x) (2B(x) - A(x) B^2(x)) \equiv 1 \pmod{x^{2t}} $
@@ -78,9 +81,9 @@
         \end{itemize}
         \myminted{cpp}{math/poly_operation.cpp}
 
-\section{筛\ \small(ct,cxy,Nightfall)}
+\section{筛~\small(ct,cxy,Nightfall)}
 
-    \subsection*{杜教筛\ \small(ct)}
+    \subsection*{杜教筛~\small(ct)}
         \noindent Dirichlet卷积：$ (f \ast g) (n) = \sum\limits_{d \mid n}^{} f(d) g(\dfrac{n}{d}) $
         \\对于积性函数$ f(n) $，求其前缀和$ S(n) = \sum\limits_{i = 1}^{n} f(i) $
         \\寻找一个恰当的积性函数$ g(n) $，使得$ g(n) $和$ (f \ast g) (n) $的前缀和都容易计算
@@ -95,11 +98,11 @@
         \end{itemize}
         \myminted{cpp}{math/du_jiao_sieve.cpp}
 
-    \subsection*{Extended\ Eratosthenes\ Sieve\ \small(Nightfall)}
+    \subsection*{Extended~Eratosthenes~Sieve~\small(Nightfall)}
         一般积性函数的前缀和，要求：$ f(p) $为多项式
         \myminted{cpp}{math/ex_eratosthenes_sieve.cpp}
 
-    \subsection*{Min25筛\ \small(cxy)}
+    \subsection*{Min25筛~\small(cxy)}
         \subsubsection*{Min25筛}
             $O(\dfrac{n^\dfrac{3}{4}}{\log n})$求$\sum\limits_{i = 1}^n f(i)$，其中$f(i)$是积性函数且$f(p^e)$是关于$p$的低阶多项式
             \\$g(n, j) = \sum\limits_{i = 1}^n [i~\text{is a prime or}~\min_p(i) > p_j] i^k$
@@ -111,33 +114,33 @@
         \subsubsection*{实现$f(p^k) = p^k(p^k - 1)$}
             \myminted{cpp}{math/min25.cpp}
 
-    \subsection*{洲阁筛\ \small(ct)}
+    \subsection*{洲阁筛~\small(ct)}
         \subsubsection*{实现区间$[a, b]$里有多少个数满足：含有至少一个$>p$的素因数}
             \myminted{cpp}{math/zhou_sieve_1.cpp}
         \subsubsection*{实现$\sum\limits_{i=1}^n \sum\limits_{j=1}^n \operatorname{sgcd}(i, j)^k$, 其中$\operatorname{sgcd}(i, j) = \begin{cases} 0 & \gcd(i, j) = 1 \\ \text{The second-largest common divisor of}~i~\text{and}~j & \text{otherwise} \end{cases}$}
             \myminted{cpp}{math/zhou_sieve_2.cpp}
 
-\section{BSGS\ \small(ct,Durandal)}
-    \subsection*{BSGS\ \small(ct)}
+\section{BSGS~\small(ct,Durandal)}
+    \subsection*{BSGS~\small(ct)}
         $ p $是素数，返回$ \min\lbrace x \geq 0 \mid y^x \equiv z \pmod p \rbrace $
         \myminted{cpp}{math/bsgs.cpp}
-    \subsection*{ex-BSGS\ \small(Durandal)}
+    \subsection*{ex-BSGS~\small(Durandal)}
         必须满足$ 0 \leq a < p $, $ 0 \leq b < p $，返回$ \min\lbrace x \geq 0 \mid a^x \equiv b \pmod p\rbrace $
         \myminted{cpp}{math/ex_bsgs.cpp}
 
-\section{直线下整点个数\ \small(gy)}
+\section{直线下整点个数~\small(gy)}
     必须满足$ a \geq 0 $, $ b \geq 0 $, $ m > 0 $，返回$ \sum\limits_{i=0}^{n-1} \dfrac{a + bi}{m} $
     \myminted{cpp}{math/points_below_line.cpp}
 
-\section{Pell\ equation\ \small(gy)}
+\section{Pell~equation~\small(gy)}
     $ x^2 - n y^2 = 1 $有解当且仅当$ n $不为完全平方数
     \\求其特解$ (x_0, y_0) $
     \\其通解为$ (x_{k + 1}, y_{k + 1}) = (x_0 x_k + n y_0 y_k, x_0 y_k + y_0 x_k ) $
     \myminted{cpp}{math/pell.cpp}
 
-\section{单纯形\ \small(gy)}
+\section{单纯形~\small(gy)}
     返回$ x_{m \times 1} $使得$ \max \lbrace c_{1 \times m} \cdot x_{m \times 1} \mid x_{m \times 1} \geq 0_{m \times 1}, A_{n \times m} \cdot x_{m \times 1} \leq b_{n \times 1} \rbrace $
     \myminted{cpp}{math/simplex.cpp}
 
-\section{数学知识\ \small(gy)}
+\section{数学知识~\small(gy)}
     \input{math/tex.tex}

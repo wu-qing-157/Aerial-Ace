@@ -1,62 +1,70 @@
-\section{2-SAT\ \small(ct)}
+\section{2-SAT~\small(ct)}
     \myminted{cpp}{graph_theory/2_sat.cpp}
 
-\section{割点与桥\ \small(ct)}
+\section{割点与桥~\small(ct)}
     \subsection*{割点}
         \myminted{cpp}{graph_theory/cut_point.cpp}
     \subsection*{桥}
         \myminted{cpp}{graph_theory/bridge.cpp}
 
-\section{Steiner\ tree\ \small(lhy)}
+\section{Steiner~tree~\small(lhy)}
     \myminted{cpp}{graph_theory/steiner_tree.cpp}
 
-\section{K短路\ \small(lhy)}
+\section{K短路~\small(lhy)}
     \myminted{cpp}{graph_theory/kth_minimum_path.cpp}
 
-\section{最大团\ \small(Nightfall)}
+\section{最大团~\small(Nightfall)}
     时间复杂度建议$ n \leq 150 $
     \myminted{cpp}{graph_theory/maximum_clique.cpp}
 
-\section{极大团计数\ \small(Nightfall)}
+\section{极大团计数~\small(Nightfall)}
     $ 0 $-based, 需删除自环
     \\极大团计数, 最坏情况$ O(3^{n / 3}) $
     \myminted{cpp}{graph_theory/maximum_clique_count.cpp}
 
-\section{三元环计数\ \small(cxy)}
+\section{三元环计数~\small(cxy)}
     \myminted{cpp}{graph_theory/ternary_ring.cpp}
 
-\section{二分图最大匹配\ \small(lhy)}
+\section{二分图最大匹配~\small(lhy)}
     左侧$ n $个点，右侧$ m $个点，$ 1 $-based，初始化将$ matx $和$ maty $置为$ 0 $
     \myminted{cpp}{graph_theory/hopcroft_karp.cpp}
 
-\section{一般图最大匹配\ \small(lhy)}
+\section{一般图最大匹配~\small(lhy)}
     \myminted{cpp}{graph_theory/blossom.cpp}
 
-\section{KM算法\ \small(Nightfall)}
+\section{KM算法~\small(Nightfall)}
     $ O(n^3) $，$ 1 $-based，最大权匹配
     \\不存在的边权值开到$ -n \times (\left| MAXV \right|) $，$ \infty $为$ 3 n \times (\left| MAXV \right|) $
     \\匹配为$ (lk_i, i) $
     \myminted{cpp}{graph_theory/km.cpp}
 
-\section{最小树形图\ \small(Nightfall)}
+\section{最小树形图~\small(Nightfall)}
     \myminted{cpp}{graph_theory/zhu_liu.cpp}
 
-\section{支配树\ \small(ct,Nightfall)}
-    \subsection*{DAG\ \small(ct)}
+\section{支配树~\small(ct,Nightfall)}
+    \subsection*{DAG~\small(ct)}
         \myminted{cpp}{graph_theory/dominator_tree_dag.cpp}
-    \subsection*{一般图\ \small(Nightfall)}
+    \subsection*{一般图~\small(Nightfall)}
         \myminted{cpp}{graph_theory/dominator_tree.cpp}
 
-\section{虚树\ \small(ct)}
+\section{虚树~\small(ct)}
     \myminted{cpp}{graph_theory/virtual_tree.cpp}
 
-\section{点分治\ \small(ct)}
+\section{点分治~\small(ct)}
     \myminted{cpp}{graph_theory/divide_conquer_on_tree.cpp}
 
-\section{树上倍增\ \small(ct)}
+\section{树上倍增~\small(ct)}
     \myminted{cpp}{graph_theory/multiplier_on_tree.cpp}
 
-\section{Link-Cut\ Tree\ \small(ct)}
+\section{树哈希~\small(lhy,Luna)}
+    \subsection*{简易版~\small(lhy)}
+        每个节点的哈希值为每个子树哈希值的三次方和$ + 1 $
+    \subsection*{高级版~\small(Luna)}
+        \noindent $A_i$表示以$i$为根的子树的哈希值\\
+        $B_i$表示整棵树以$i$为根的哈希值
+        \myminted{cpp}{graph_theory/tree_hash.cpp}
+
+\section{Link-Cut~Tree~\small(ct)}
     LCT常见应用
     \begin{itemize}[nosep, wide=0pt]
         \item \textbf{动态维护边双}
@@ -89,18 +97,25 @@
     \end{itemize}
     \myminted{cpp}{graph_theory/link_cut_tree.cpp}
 
-\section{圆方树\ \small(ct)}
+\section{圆方树~\small(ct)}
     \myminted{cpp}{graph_theory/circle_square_tree.cpp}
 
-\section{无向图最小割\ \small(Nightfall)}
+\section{无向图最小割~\small(Nightfall)}
     \myminted{cpp}{graph_theory/stoer_wagner.cpp}
 
-\section{网络流\ \small(lhy,ct)}
-    \subsection*{Dinic\ \small(ct)}
+\section{网络流~\small(lhy,ct)}
+    \subsection*{Dinic~\small(ct)}
         \myminted{cpp}{graph_theory/dinic.cpp}
-    \subsection*{SAP\ \small(lhy)}
+    \subsection*{SAP~\small(lhy)}
         \myminted{cpp}{graph_theory/sap.cpp}
-    \subsection*{zkw费用流\ \small(lhy)}
+    \subsection*{zkw费用流~\small(lhy)}
         \myminted{cpp}{graph_theory/zkw_min_cost_flow.cpp}
-\section{图论知识\ \small(gy,lhy)}
+
+\section{欧拉回路~\small(cxy)}
+    \subsection*{有向图欧拉回路 无向图欧拉回路}
+        \myminted{cpp}{graph_theory/eular_circuit.cpp}
+    \subsection*{混合图欧拉回路}
+        将无向边任意定向，随后对每个点计算权值$ \frac{1}{2}| \text{入度} - \text{出度} |$，如果$ \text{入度} < \text{出度} $，从$ S $向该点连接一条流量为该点权值的边，如果$ \text{入度} > \text{出度} $，从该点向$ T $连接一条流量为该点权值的，随后将所有无向边按照之前所定方向连接一条流量为$ 1 $的边，随后跑最大流。如果两边的边都满流，则混合图欧拉回路有解，只需将中间满流的边反向，跑有向图欧拉回路即可
+
+\section{图论知识~\small(gy,lhy)}
     \input{graph_theory/tex.tex}

@@ -23,6 +23,10 @@
 \usepackage{xeCJK}
 \usepackage{xpatch}
 
+\xeCJKsetup{CJKmath=true, CheckSingle=true}
+\setCJKmainfont{微软雅黑}
+\setmonofont{Ubuntu Mono}
+
 \geometry{a4paper, scale=0.8}
 %\geometry{a4paper, scale=0.9}
 \pagestyle{fancy}
@@ -30,7 +34,7 @@
 
 \titleformat{\chapter}{\huge\bfseries\centering}{}{0em}{}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.~#1}}
 \fancyhead[RO,LE]{\rightmark}
 \fancyhead[LO,RE]{\leftmark}
 \renewcommand{\contentsname}{目录}
@@ -64,6 +68,7 @@
     \inputminted[
         breaklines,
         breakafter=()\&|,
+        %fontfamily=\UbuntuMono,
         fontsize=\small,
         frame=single,
         framesep=1mm,
@@ -82,8 +87,8 @@
 %\titlespacing{\section}{0pt}{0pt}{0.5pt}
 %\titleformat{\subsection}{\normalfont\bfseries\normalsize}{}{0pt}{}
 %\titlespacing{\subsection}{0pt}{0pt}{0pt}
-%\setlength{\cftbeforetoctitleskip}{0pt}
-%\setlength{\cftaftertoctitleskip}{1pt}
+\setlength{\cftbeforetoctitleskip}{10pt}
+\setlength{\cftaftertoctitleskip}{10pt}
 
 \begin{document}
     % Title for unlimited version
@@ -92,11 +97,11 @@
         \rule{\linewidth}{0.5mm}\\[0.4cm]
         {\Huge\bfseries Aerial Ace}\\[\baselineskip]
         {\textit {\Large Team Reference Material}}\\
-        {\textit {\small (unlimited version)}}\\[0.4cm]
-        \rule{\linewidth}{0.5mm}\\[2cm]
+        {\small (unlimited version)}\\[0.3cm]
+        {\LARGE\bfseries 2.0}\\[0.1cm]
+        \rule{\linewidth}{0.5mm}
         \vfill
-        \includegraphics[scale=0.4]{pictures/Groudon.jpg}\\[0.4cm]
-        {\large ------ 还有谁不会飞 ------}
+        \includegraphics[scale=0.2]{pictures/Jirachi.png}
         \vfill
         \makebox[1.6cm]{\Large 顾 \hfill 逸}\\[0.1cm]
         \makebox[1.6cm]{\Large 陈 \hfill 彤}\\[0.1cm]
@@ -132,6 +137,10 @@
     \mychapter{String}{string.tex}
     \mychapter{Data Structure}{data_structure.tex}
     \mychapter{Others}{others.tex}
+
+    \appendix
+    \mychapter{Additional Documents}{appendix.tex}
+
     % Picture for limited version
     %\vfill
     %\centerline{\includegraphics[scale=1]{aerial-ace.jpg}}
