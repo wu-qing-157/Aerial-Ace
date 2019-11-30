@@ -1,0 +1,91 @@
+\documentclass[titlepage, openany]{article}
+%\documentclass[titlepage, openany, oneside]{book}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{emptypage}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage{longtable}
+\usepackage{mdframed}
+\usepackage[cache=false]{minted}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{pdfpages}
+\usepackage{ragged2e}
+\usepackage{textcomp}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{xeCJK}
+\usepackage{xpatch}
+
+\xeCJKsetup{CJKmath=true, CheckSingle=true}
+\setCJKmainfont{微软雅黑}
+\setmonofont{Ubuntu Mono}
+
+\geometry{a4paper, scale=0.8}
+%\geometry{a4paper, scale=0.9}
+
+% Splitter of multicols
+%\makeatletter
+%\def\columnseprulecolor\vrule\@width\columnseprule{\vbox to \ht\mult@rightbox{\leaders\vbox{\kern0.4pt\hbox{.}\kern0.4pt}\vfill}}
+%\makeatother
+
+% New chapter for limited version
+%\newcommand{\mychapter}[2]{
+    %\noindent\rule\linewidth{2pt}
+    %\begin{multicols}{2}
+        %\let\clearpage\relax\chapter{#1}
+        %\input{#2}
+    %\end{multicols}
+%}
+% New chapter for unlimited version
+\newcommand{\mychapter}[2]{
+    \chapter{#1}
+    \input{#2}
+    \cleardoublepage
+}
+
+\renewcommand{\theFancyVerbLine}{\sffamily\textcolor[rgb]{0.5, 0.5, 0.5}{\tiny\arabic{FancyVerbLine}}}
+\usemintedstyle{colorful}
+\newcommand{\myminted}[2]{
+    \inputminted[
+        breaklines,
+        breakafter=()\&|,
+        %fontfamily=\UbuntuMono,
+        fontsize=\small,
+        frame=single,
+        framesep=1mm,
+        framerule=1pt,
+        linenos,
+        numbersep=1pt,
+        tabsize=4,
+        %xleftmargin=4pt
+    ]{#1}{#2}
+}
+
+% Smaller title and spacing
+%\titleformat{\chapter}{\normalfont\bfseries\Large}{\textcolor[rgb]{0.5, 0.5, 0.5}{\chaptertitlename \thechapter.}}{10pt}{}
+%\titlespacing{\chapter}{0pt}{0pt}{1pt}
+%\titleformat{\section}{\normalfont\bfseries\large}{\thesection.}{10pt}{}
+%\titlespacing{\section}{0pt}{0pt}{0.5pt}
+%\titleformat{\subsection}{\normalfont\bfseries\normalsize}{}{0pt}{}
+%\titlespacing{\subsection}{0pt}{0pt}{0pt}
+%\setlength{\cftbeforetoctitleskip}{10pt}
+%\setlength{\cftaftertoctitleskip}{10pt}
+
+\begin{document}
+    \noindent\rule\linewidth{2pt}\\[0.3cm]
+    \centerline{\textbf{\Huge Aerial Ace}}\\[\baselineskip]
+    \centerline{\large Team Reference Material}\\
+    \centerline{\small Supplement for 2.0}\\[0.3cm]
+    \noindent\rule\linewidth{2pt}
+    \section{SPFA费用流}
+        \myminted{cpp}{graph_theory/min_cost_max_flow.cpp}
+    \section{广义后缀自动机}
+        \myminted{cpp}{string/general_suffix_automaton.cpp}
+\end{document}

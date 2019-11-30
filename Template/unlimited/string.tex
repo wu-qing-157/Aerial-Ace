@@ -1,8 +1,8 @@
 \newcommand{\lcp}{\operatorname{lcp}}
-\section{KMP~\small(ct)}
-    \subsection*{KMP}
+\section{KMP~\small(ct,Luna)}
+    \subsection*{KMP~\small(ct)}
         \myminted{cpp}{string/kmp.cpp}
-    \subsection*{exKMP}
+    \subsection*{exKMP~\small(Luna)}
         $a_i = \lcp(s + i, t), b_i = lcp(t + i, t) $
         \myminted{cpp}{string/ex_kmp.cpp}
 
@@ -19,7 +19,10 @@
     \myminted{cpp}{string/suffix_array.cpp}
 
 \section{后缀自动机~\small(ct)}
-    \myminted{cpp}{string/suffix_automaton.cpp}
+    \subsection*{后缀自动机}
+        \myminted{cpp}{string/suffix_automaton.cpp}
+    \subsection*{广义后缀自动机}
+        \myminted{cpp}{string/general_suffix_automaton.cpp}
 
 \section{Manacher~\small(ct)}
     \myminted{cpp}{string/manacher.cpp}
